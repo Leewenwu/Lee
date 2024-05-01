@@ -22,22 +22,32 @@
 
 
 <style type="text/css">
+
+
+.page {
+ /*	position: absolute; 頁碼位置是否跟隨表格底部  */
+	bottom: -100px;  
+	text-align: center;
+	width: 80%;
+}
+
 a {
-    display: inline-block;
-    padding: 7px 14px;
-    font-size: 14px;
-    color: black;  /* 默认颜色 */
-    background-color: transparent;  /* 默认背景色 */
-    text-decoration: none;
-    border-radius: 5px;  /* 圆角 */
-    transition: background-color 0.3s, color 0.3s;  /* 平滑过渡效果 */
+	display: inline-block;
+	padding: 7px 14px;
+	font-size: 14px;
+	color: black; /* 默认颜色 */
+	background-color: transparent; /* 默认背景色 */
+	text-decoration: none;
+	border-radius: 5px; /* 圆角 */
+	transition: background-color 0.3s, color 0.3s; /* 平滑过渡效果 */
 }
 
 /* 激活样式 */
 .active {
-    background-color: #006B00;
-    color: #ffffff;
+	background-color: #006B00;
+	color: #ffffff;
 }
+
 .main-content {
 	margin-left: 200px;
 	padding: 20px;
@@ -125,8 +135,12 @@ tr:nth-child(even) {
 }
 /*  ------------------------ */
 .G3_content {
+	height: 1000px; /* 设置固定高度 */
+	overflow: auto; /* 添加滚动条 */
 	text-align: left;
 	padding: 20px;
+	overflow: auto; /* 添加滚动条 */
+	text-align: left;
 }
 
 .justify-content-center {
@@ -273,6 +287,7 @@ tr:nth-child(even) {
 							<div class="d-flex align-items-center">
 								<img class="rounded-circle" src="/picture/user.jpg" alt=""
 									style="width: 40px; height: 40px;">
+
 								<div class="ms-2">
 									<h6 class="fw-normal mb-0">John sent you a message</h6>
 									<small>15 minutes ago</small>
@@ -307,11 +322,10 @@ tr:nth-child(even) {
 				<div class="G3_content">
 
 
-
+					<!-- 表格開始 -->
 					<div align="center">
-					
-						<b><font color=red>第<label id="currentPage">1</label>/<label
-						
+
+						<b><font color=red style="display: none;">第<label id="currentPage">1</label>/<label
 								id="pageNumber"></label>頁
 						</font></b>
 
@@ -480,23 +494,24 @@ tr:nth-child(even) {
 			//默認第一頁的a標簽效果  
 			var $pagess = $('#pageStyle');
 			$pagess[0].classList.add('active');
-		
-		
+
 		});
 
 		//a鏈接點擊變色，再點其他回復原色  
-		function changCss(obj  ,event) {
-		
-			
+		function changCss(obj, event) {
+
 			var arr = document.getElementsByTagName("a");
-			 for (var i = 0; i < arr.length; i++) {
-			        arr[i].classList.remove('active');  // 移除激活类
-			    }
-			    obj.classList.add('active');  // 添加激活类
-				
-				 
-			
+			for (var i = 0; i < arr.length; i++) {
+				arr[i].classList.remove('active'); // 移除激活类
+			}
+			obj.classList.add('active'); // 添加激活类
+
 		}
+
+		$(document).ready(function() {
+			var $pager = $('<div class="page"></div>'); // 创建分页控件
+			$('.center').append($pager); // 将分页控件添加到容器底部
+		});
 	</script>
 
 </body>
