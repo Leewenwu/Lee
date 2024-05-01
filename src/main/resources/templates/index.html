@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+
+<link th:href="@{/css/css2.css}" rel="stylesheet">
+<link th:href="@{/css/all.min.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+<link th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
+<link th:href="@{/css/tempusdominus-bootstrap-4.min.css}"
+	rel="stylesheet">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+
+<style>
+.G3_content {
+	text-align: left;
+	padding: 20px;
+}
+
+.justify-content-center {
+	justify-content: flex-start !important;
+}
+</style>
+</head>
+
+<body>
+
+	<div class="container-fluid position-relative bg-white d-flex p-0">
+
+		<div id="spinner"
+			class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+			<div class="spinner-border text-primary"
+				style="width: 3rem; height: 3rem;" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+
+		<div class="sidebar pe-4 pb-3">
+			<nav class="navbar bg-light navbar-light">
+				<a href="index1.html" class="navbar-brand mx-4 mb-3">
+					<h3 class="text-primary">
+						<i class="fa fa-hashtag me-2"></i>JoyfulResort
+					</h3>
+				</a>
+				<div class="d-flex align-items-center ms-4 mb-4">
+					<div class="position-relative">
+
+						<img class="rounded-circle" th:src="@{/picture/user.jpg}" alt=""
+							style="width: 40px; height: 40px;">
+						<div
+							class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+					</div>
+					<div class="ms-3">
+						<h6 class="mb-0">員工姓名</h6>
+						<span>員工職位</span>
+					</div>
+				</div>
+				<div class="navbar-nav w-100">
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>員工管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="員工個人頁面.html" class="dropdown-item">個人資料管理</a> <a
+								href="員工查詢頁面.html" class="dropdown-item">員工查詢</a> <a
+								href="員工新增修改頁面.html" class="dropdown-item">人資專區</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<a href="會員頁面.jsp" class="nav-item nav-link"><i
+						class="fa fa-laptop me-2"></i>會員管理</a>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>房間資料管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="房型新增修改頁面.html" class="dropdown-item">房型管理</a> <a
+								href="房間新增修改頁面.html" class="dropdown-item">房間管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>房務管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="checkin頁面.jsp" class="dropdown-item">check in</a> <a
+								href="checkout頁面.jsp" class="dropdown-item">check out</a> <a
+								href="住宿訂單管理頁面.jsp" class="dropdown-item">住宿訂單管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>活動管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="活動新增修改頁面.html" class="dropdown-item">活動內容管理</a> <a
+								href="活動訂單管理頁面.html" class="dropdown-item">活動訂單管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-keyboard me-2"></i>會議廳管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="會議廳新增修改頁面.html" class="dropdown-item">會議廳內容管理</a> <a
+								href="會議廳訂單管理頁面.html" class="dropdown-item">會議廳訂單管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>餐廳管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="餐廳新增修改頁面.html" class="dropdown-item">餐廳內容管理</a> <a
+								href="餐廳訂單管理頁面.html" class="dropdown-item">餐廳訂單管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>圖文管理</a>
+						<div class="dropdown-menu bg-transparent border-0">
+							<a href="最新消息新增修改頁面.html" class="dropdown-item">最新消息管理</a> <a
+								href="媒體報導管理頁面.html" class="dropdown-item">媒體報導管理</a> <a
+								href="常見問題管理頁面.html" class="dropdown-item">常見問題管理</a> <a
+								href="element.html" class="dropdown-item"></a>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="content">
+
+			<nav
+				class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+				<a href="index1.html" class="navbar-brand d-flex d-lg-none me-4">
+					<h2 class="text-primary mb-0">
+						<i class="fa fa-hashtag"></i>
+					</h2>
+				</a> <a href="#" class="sidebar-toggler flex-shrink-0"> <i
+					class="fa fa-bars"></i>
+				</a>
+				<div class="navbar-nav align-items-center ms-auto">
+					<div class="nav-item dropdown"
+						style="visibility: hidden; opacity: 0;">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"> <i class="fa fa-envelope me-lg-2"></i>
+							<span class="d-none d-lg-inline-flex">Message</span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+							<a href="#" class="dropdown-item">
+								<div class="d-flex align-items-center">
+									<img class="rounded-circle" src="/picture/user.jpg" alt=""
+										style="width: 40px; height: 40px;">
+									<div class="ms-2">
+										<h6 class="fw-normal mb-0">John sent you a message</h6>
+										<small>15 minutes ago</small>
+									</div>
+								</div>
+							</a>
+							<hr class="dropdown-divider">
+							<!-- 重複的消息項目可以移除或根据需求进行修改 -->
+							<a href="#" class="dropdown-item text-center">See all
+								messages</a>
+						</div>
+					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"> <img
+							class="rounded-circle me-lg-2" src="/picture/user.jpg" alt=""
+							style="width: 40px; height: 40px;"> <span
+							class="d-none d-lg-inline-flex">員工姓名</span>
+						</a>
+						<div
+							class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+							<a href="員工資料頁.jsp" class="dropdown-item">基本資料</a> <a
+								href="登出.jsp" class="dropdown-item">Log Out</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded">
+					<div class="G3_content"></div>
+				</div>
+			</div>
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded-top p-4">
+					<div class="row">
+						<div class="col-12 col-sm-6 text-center text-sm-start">@JoyfulResort</div>
+						<div class="col-12 col-sm-6 text-center text-sm-end"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+		<!-- 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i -->
+		<!-- 			class="bi bi-arrow-up"></i></a> -->
+		<!-- 		</div> -->
+
+
+
+
+		<!-- 	<script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/chart.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/easing.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/waypoints.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/owl.carousel.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/moment.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/moment-timezone.min.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/tempusdominus-bootstrap-4.min.js" -->
+		<!-- 		type="text/javascript"></script> -->
+		<!-- 	<script src="/js/main.js" type="text/javascript"></script> -->
+		<!-- 	<script src="/js/bootstrap.bundle.min.js" -->
+		<!-- 		type="f3b0939065fde96a75ea2bd3-text/javascript"></script> -->
+		<!-- 	<script src="/js/rocket-loader.min.js" -->
+		<!-- 		data-cf-settings="f3b0939065fde96a75ea2bd3-|49"></script> -->
+
+
+
+
+
+		<script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/chart.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/easing.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/waypoints.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/owl.carousel.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/moment.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/moment-timezone.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/tempusdominus-bootstrap-4.min.js}"
+			type="text/javascript"></script>
+		<script th:src="@{/js/main.js}" type="text/javascript"></script>
+		<script th:src="@{/js/rocket-loader.min.js}"
+			data-cf-settings="f3b0939065fde96a75ea2bd3-|49"></script>
+</body>
+</html>
