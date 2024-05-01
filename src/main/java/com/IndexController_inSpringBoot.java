@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joyfulresort.member.model.MemberService;
+import com.joyfulresort.member.model.MemberVO;
 
 @Controller
 public class IndexController_inSpringBoot {
@@ -53,11 +54,11 @@ public class IndexController_inSpringBoot {
 //		return "back-end/emp/listAllEmp";
 //	}
 //    
-//    @ModelAttribute("empListData")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
-//	protected List<MemberVO> referenceListData(Model model) {
-//		
-//    	List<MemberVO> list = memberSvc.getAll();
-//		return list;
-//	}
+    @ModelAttribute("MemberList")  // for select_page.html 第97 109行用 // for listAllEmp.html 第117 133行用
+	protected List<MemberVO> referenceListData(Model model) {
+		
+    	List<MemberVO> list = memberSvc.getAll();
+		return list;
+	}
 
 }
