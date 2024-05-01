@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import com.joyfulresort.member.model.MemberService;
 
 @Controller
-@RequestMapping("/Member")
+@RequestMapping("/member")
 public class DBGifReaderController {
 
 	@Autowired
