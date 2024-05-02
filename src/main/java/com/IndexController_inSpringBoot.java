@@ -34,20 +34,20 @@ public class IndexController_inSpringBoot {
         return "index"; //view
     }
     
-    // http://......../hello?name=peter1
-    @GetMapping("/hello")
+ 
+    @GetMapping("/main_page")
     public String indexWithParam(
             @RequestParam(name = "name", required = false, defaultValue = "") String name, Model model) {
         model.addAttribute("message", name);
-        return "index"; //view
+        return "back-end/main_page"; //view
     }
     
+   
   
-    //=========== 以下第57~62行是提供給 /src/main/resources/templates/back-end/emp/select_page.html 與 listAllEmp.html 要使用的資料 ===================   
-//    @GetMapping("/emp/select_page")
-//	public String select_page(Model model) {
-//		return "back-end/emp/select_page";
-//	}
+    @GetMapping("/member/member")
+	public String member(Model model) {
+		return "back-end/member/member";
+	}
 //    
 //    @GetMapping("/emp/listAllEmp")
 //	public String listAllEmp(Model model) {
