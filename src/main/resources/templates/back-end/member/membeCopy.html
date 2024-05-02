@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+
+<link th:href="@{/css/css2.css}" rel="stylesheet">
+<link th:href="@{/css/all.min.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">
+<link th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
+<link th:href="@{/css/tempusdominus-bootstrap-4.min.css}"
+	rel="stylesheet">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+<style type="text/css">
+.page {
+	/*	position: absolute; 頁碼位置是否跟隨表格底部  */
+	bottom: -100px;
+	text-align: center;
+	width: 80%;
+}
+
+a {
+	display: inline-block;
+	padding: 7px 14px;
+	font-size: 14px;
+	color: black; /* 默认颜色 */
+	background-color: transparent; /* 默认背景色 */
+	text-decoration: none;
+	border-radius: 5px; /* 圆角 */
+	transition: background-color 0.3s, color 0.3s; /* 平滑过渡效果 */
+}
+
+.active {
+	background-color: #006B00;
+	color: #ffffff;
+}
+
+.main-content {
+	margin-left: 200px;
+	padding: 20px;
+	background: #ffffff;
+	min-height: 100vh; /* 確保至少和視窗同高 */
+	font-size: 0.9em; /* 適當的字體大小 */
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 將子元素（表格）置中 */
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	max-width: 100%; /* 確保表格不超過容器寬度 */
+	margin: 20px auto; /* 上下保持20px間距，左右自動（置中） */
+	display: table; /* 確保表格為表格顯示 */
+}
+
+th, td {
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 10px; /* 增加間距讓表格更易於閱讀 */
+	font-size: 0.9em; /* 統一字體大小 */
+	word-break: break-word;
+}
+
+.table td {
+	text-align: center; /* 水平居中 */
+	vertical-align: middle; /* 垂直居中 */
+}
+
+h1 {
+	text-align: center;
+}
+
+th {
+	background-color: #f9f9f9; /* 淡色背景 */
+	color: #333; /* 深色文字 */
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2; /* 輪流顏色以分隔行 */
+}
+
+.button-group button, input[type="submit"] {
+	padding: 8px 15px;
+	margin-right: 10px;
+	background-color: #5cb85c;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.button-group button:hover, input[type="submit"]:hover {
+	background-color: #4cae4c;
+}
+
+.search-form {
+	margin-bottom: 20px; /* 為搜尋表格添加間距 */
+	display: flex;
+	align-items: center; /* 這會將所有子項目對齊到同一水平線 */
+	justify-content: center; /* 這會在容器中水平居中所有子項目 */
+	flex-wrap: wrap; /* 確保在較小的屏幕上元素可以換行 */
+	gap: 10px; /* 元素之間的間距 */
+}
+
+.search-form input[type="text"], .search-form select {
+	padding: 5px 0px;
+	margin-right: 10px; /* 為輸入框添加間距 */
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.search-form input[type="submit"] {
+	padding: 8px 5px;
+	margin-right: 10px;
+	background-color: #5cb85c;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+/*  ------------------------ */
+.G3_content {
+	height: 1000px; /* 设置固定高度 */
+	overflow: auto; /* 添加滚动条 */
+	text-align: left;
+	padding: 20px;
+	overflow: auto; /* 添加滚动条 */
+	text-align: left;
+}
+
+.justify-content-center {
+	justify-content: flex-start !important;
+}
+</style>
+
+</head>
+
+
+
+<body>
+
+	<!-- 不知道啥用<div class="container-fluid position-relative bg-white d-flex p-0"> -->
+
+	<div id="spinner"
+		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+		<div class="spinner-border text-primary"
+			style="width: 3rem; height: 3rem;" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+	<div class="sidebar pe-4 pb-3">
+		<nav class="navbar bg-light navbar-light">
+			<a href="index1.html" class="navbar-brand mx-4 mb-3">
+				<h3 class="text-primary">
+					<i class="fa fa-hashtag me-2"></i>JoyfulResort
+				</h3>
+			</a>
+			<div class="d-flex align-items-center ms-4 mb-4">
+				<div class="position-relative">
+
+					<img class="rounded-circle" th:src="@{/picture/user.jpg}" alt=""
+						style="width: 40px; height: 40px;">
+					<div
+						class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+				</div>
+				<div class="ms-3">
+					<h6 class="mb-0">員工姓名</h6>
+					<span>員工職位</span>
+				</div>
+			</div>
+			<div class="navbar-nav w-100">
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>員工管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="員工個人頁面.html" class="dropdown-item">個人資料管理</a> <a
+							href="員工查詢頁面.html" class="dropdown-item">員工查詢</a> <a
+							href="員工新增修改頁面.html" class="dropdown-item">人資專區</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<a href="會員頁面.jsp" class="nav-item nav-link"><i
+					class="fa fa-laptop me-2"></i>會員管理</a>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>房間資料管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="房型新增修改頁面.html" class="dropdown-item">房型管理</a> <a
+							href="房間新增修改頁面.html" class="dropdown-item">房間管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>房務管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="checkin頁面.jsp" class="dropdown-item">check in</a> <a
+							href="checkout頁面.jsp" class="dropdown-item">check out</a> <a
+							href="住宿訂單管理頁面.jsp" class="dropdown-item">住宿訂單管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>活動管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="活動新增修改頁面.html" class="dropdown-item">活動內容管理</a> <a
+							href="活動訂單管理頁面.html" class="dropdown-item">活動訂單管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-keyboard me-2"></i>會議廳管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="會議廳新增修改頁面.html" class="dropdown-item">會議廳內容管理</a> <a
+							href="會議廳訂單管理頁面.html" class="dropdown-item">會議廳訂單管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>餐廳管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="餐廳新增修改頁面.html" class="dropdown-item">餐廳內容管理</a> <a
+							href="餐廳訂單管理頁面.html" class="dropdown-item">餐廳訂單管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>圖文管理</a>
+					<div class="dropdown-menu bg-transparent border-0">
+						<a href="最新消息新增修改頁面.html" class="dropdown-item">最新消息管理</a> <a
+							href="媒體報導管理頁面.html" class="dropdown-item">媒體報導管理</a> <a
+							href="常見問題管理頁面.html" class="dropdown-item">常見問題管理</a> <a
+							href="element.html" class="dropdown-item"></a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div class="content">
+
+		<nav
+			class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+			<a href="index1.html" class="navbar-brand d-flex d-lg-none me-4">
+				<h2 class="text-primary mb-0">
+					<i class="fa fa-hashtag"></i>
+				</h2>
+			</a> <a href="#" class="sidebar-toggler flex-shrink-0"> <i
+				class="fa fa-bars"></i>
+			</a>
+			<div class="navbar-nav align-items-center ms-auto">
+				<div class="nav-item dropdown"
+					style="visibility: hidden; opacity: 0;">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"> <i class="fa fa-envelope me-lg-2"></i>
+						<span class="d-none d-lg-inline-flex">Message</span>
+					</a>
+					<div
+						class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+						<a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<img class="rounded-circle" src="/picture/user.jpg" alt=""
+									style="width: 40px; height: 40px;">
+
+								<div class="ms-2">
+									<h6 class="fw-normal mb-0">John sent you a message</h6>
+									<small>15 minutes ago</small>
+								</div>
+							</div>
+						</a>
+						<hr class="dropdown-divider">
+						<!-- 重複的消息項目可以移除或根据需求进行修改 -->
+						<a href="#" class="dropdown-item text-center">See all messages</a>
+					</div>
+				</div>
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown"> <img class="rounded-circle me-lg-2"
+						src="/picture/user.jpg" alt="" style="width: 40px; height: 40px;">
+						<span class="d-none d-lg-inline-flex">員工姓名</span>
+					</a>
+					<div
+						class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+						<a href="員工資料頁.jsp" class="dropdown-item">基本資料</a> <a
+							href="登出.jsp" class="dropdown-item">Log Out</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+
+
+
+		<div class="container-fluid pt-4 px-4">
+			<div class="bg-light rounded">
+				<div class="G3_content">
+					<!-- 不同分頁內容從這開始 -->
+
+
+					<!-- 表格開始 -->
+					<div align="center">
+
+						<b><font color=red style="display: none;">第<label
+								id="currentPage">1</label>/<label id="pageNumber"></label>頁
+						</font></b>
+
+						<table>
+							<thead>
+								<tr>
+									<th>會員編號</th>
+									<th>會員姓名</th>
+									<th>帳號</th>
+									<th>密碼</th>
+									<th>信箱</th>
+									<th>電話</th>
+									<th>地址</th>
+									<th>帳號狀態</th>
+									<th>性別</th>
+									<th>生日</th>
+									<th>圖片</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:block th:each="member:${MemberList}">
+									<td th:text=" ${member.memId} "></td>
+									<td th:text=" ${member.mName}"></td>
+									<td th:text=" ${member.mAccount}"></td>
+									<td th:text=" ${member.mPassword}"></td>
+									<td th:text=" ${member.email}"></td>
+									<td th:text=" ${member.phone}"></td>
+									<td th:text=" ${member.address}"></td>
+									<td
+										th:text=" ${member.mState == 0 ? '未認證' : (member.mState == 1 ? '以認證' : '停權')}"></td>
+									<td th:text=" ${member.gender ? '男' :'女'}"></td>
+									<td th:text=" ${member.birthday}"></td>
+
+
+									<td><img
+										th:src="@{/member/DBGifReader}+'?memId=' + ${member.memId}"
+										style="width: 100px; height: 100px; object-fit: cover;"></td>
+
+
+
+									<td style="text-align: center; vertical-align: middle;">
+										<form method="post"
+											action="${pageContext.request.contextPath}/backend/member/member.do">
+											<input type="hidden" name="action" value="getOne"> <input
+												type="hidden" name="memId" value="${member.memId}">
+											<input type="submit" value="修改">
+										</form>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+
+
+
+					</div>
+				<!-- 不同分頁內容從這結束 -->
+				</div>
+			</div>
+		
+
+			<div class="container-fluid pt-4 px-4">
+				<div class="bg-light rounded-top p-4">
+					<div class="row">
+						<div class="col-12 col-sm-6 text-center text-sm-start">@JoyfulResort</div>
+						<div class="col-12 col-sm-6 text-center text-sm-end"></div>
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 	不知道幹嘛用	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i -->
+	<!-- 			class="bi bi-arrow-up"></i></a> -->
+	<!-- 		</div> -->
+
+
+
+
+	<!-- 	<script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/chart.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/easing.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/waypoints.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/owl.carousel.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/moment.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/moment-timezone.min.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/tempusdominus-bootstrap-4.min.js" -->
+	<!-- 		type="text/javascript"></script> -->
+	<!-- 	<script src="/js/main.js" type="text/javascript"></script> -->
+	<!-- 	<script src="/js/bootstrap.bundle.min.js" -->
+	<!-- 		type="f3b0939065fde96a75ea2bd3-text/javascript"></script> -->
+	<!-- 	<script src="/js/rocket-loader.min.js" -->
+	<!-- 		data-cf-settings="f3b0939065fde96a75ea2bd3-|49"></script> -->
+	<script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/chart.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/easing.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/waypoints.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/owl.carousel.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/moment.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/moment-timezone.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/tempusdominus-bootstrap-4.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/js/main.js}" type="text/javascript"></script>
+	<script th:src="@{/js/rocket-loader.min.js}"
+		data-cf-settings="f3b0939065fde96a75ea2bd3-|49"></script>
+
+	<script type="text/javascript">
+		//分頁顯示
+		$(function() {
+			var $table = $("table ");
+			var currentPage = 0; //當前頁默認值為0  
+			var pageSize = 6; //每一頁顯示的數目  
+			$table.bind('paging', function() {
+				$table.find('tbody tr').hide().slice(currentPage * pageSize,
+						(currentPage + 1) * pageSize).show();
+			});
+			var sumRows = $table.find('tbody tr').length;
+			var sumPages = Math.ceil(sumRows / pageSize);
+			document.getElementById("pageNumber").innerHTML = sumPages; //計算總頁數  
+
+			var $pager = $('<div class="page" align="center"></div>'); //新建div，放入a標簽,顯示底部分頁碼  
+			for (var pageIndex = 0; pageIndex < sumPages; pageIndex++) {
+				$(
+						'<a href="javascript:void(0)" id="pageStyle" onclick="changCss(this)"><span>'
+								+ (pageIndex + 1) + '</span></a>')
+						.bind(
+								"click",
+								{
+									"newPage" : pageIndex
+								},
+								function(event) {
+									currentPage = event.data["newPage"];
+									document.getElementById("currentPage").innerHTML = currentPage + 1; //用於第114行
+									$table.trigger("paging");
+									//觸發分頁函數  
+								}).appendTo($pager);
+				$pager.append(" ");
+			}
+			$pager.insertAfter($table);
+			$table.trigger("paging");
+
+			//默認第一頁的a標簽效果  
+			var $pagess = $('#pageStyle');
+			$pagess[0].classList.add('active');
+
+		});
+
+		//a鏈接點擊變色，再點其他回復原色  
+		function changCss(obj, event) {
+
+			var arr = document.getElementsByTagName("a");
+			for (var i = 0; i < arr.length; i++) {
+				arr[i].classList.remove('active'); // 移除激活类
+			}
+			obj.classList.add('active'); // 添加激活类
+
+		}
+
+		$(document).ready(function() {
+			var $pager = $('<div class="page"></div>'); // 创建分页控件
+			$('.center').append($pager); // 将分页控件添加到容器底部
+		});
+	</script>
+
+</body>
+</html>
