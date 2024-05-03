@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<base th:href="@{/}">
+
 <head>
 <meta charset="UTF-8">
 <title>Joyfulresort 會員管理</title>
@@ -8,6 +8,12 @@
 
 
 <style type="text/css">
+input[type="text"] {
+	width: 100px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
 .page {
 	/*	position: absolute; 頁碼位置是否跟隨表格底部  */
 	bottom: -100px;
@@ -147,6 +153,7 @@ tr:nth-child(even) {
 							id="currentPage">1</label>/<label id="pageNumber"></label>頁
 					</font></b>
 
+
 					<table>
 						<thead>
 							<tr>
@@ -159,35 +166,46 @@ tr:nth-child(even) {
 
 								<th>備註</th>
 								<th>訂單狀態</th>
+
 								<th></th>
 							</tr>
 						</thead>
 
+
 						<tbody>
-							<tr th:block th:each="res:${ResList}">
+							<tr th:block th:each="res, stat : ${ResList}"
+								th:id="'row' + ${stat.index}">
+
 								<td th:text=" ${res.reserveOrderId} "></td>
 								<td th:text=" ${res.ressionVO.reserveSessionId}"></td>
 								<td th:text=" ${res.memberVO.memId}"></td>
 								<td th:text=" ${res.reserveOrderDate}"></td>
 								<td th:text=" ${res.reserveNumber}"></td>
+<!-- 								<td	th:text="${res.bookingDate}"></td> -->
+								
+								<td th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td th:text=" ${res.orderNote}" th:onclick="'editCell(this)'">
+								</td>
 								<td
-									th:text="${#dates.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
-								<td th:text=" ${res.orderNote}"></td>
-								<td
-									th:text=" ${res.reserveOrderState == 0 ? '未認證' : (res.reserveOrderState == 1 ? '以認證' : '停權')}"></td>
+									th:text=" ${res.reserveOrderState == 0 ? '未認證' : (res.reserveOrderState == 1 ? '已認證' : '停權')}"></td>
 
 
+								<!-- 								<td> -->
+								<!-- 								<form style="text-align: center; vertical-align: middle;" -->
+								<!-- 								 onsubmit="return false;"> -->
+								<!-- 								<input	type="submit" value="編輯" -->
+								<!-- 								th:action="@{/reserve/get_for_update}"   -->
+								<!-- 								th:onclick="'makeEditable(' + ${stat.index} + ');'"   -->
+								<!-- 								> -->
+								<!-- 									<input type="hidden" name="reserveOrderId" th:value="${res.reserveOrderId}"  > -->
+								<!-- 								</form> -->
+								<!-- 								</td> -->
 
 
-
-
-
-
-								<td style="text-align: center; vertical-align: middle;">
-									<form method="post"
-										action="${pageContext.request.contextPath}/backend/member/member.do">
-										<input type="hidden" name="action" value="getOne"> <input
-											type="hidden" name="memId" value="${member.memId}"> <input
+								<td>
+									<form method="post" th:action="@{/reserve/get_for_update}">
+										<input type="hidden" name="reserveOrderId"
+											th:value="${res.reserveOrderId}"> <input
 											type="submit" value="修改">
 									</form>
 								</td>
@@ -195,21 +213,32 @@ tr:nth-child(even) {
 						</tbody>
 					</table>
 
-
-
-
-
 				</div>
-				<!-- 不同分頁內容從這結束 -->
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
 	<th:block th:insert="~{/back-end/htmlfile/content2}" />
 	<th:block th:insert="~{/back-end/htmlfile/script}" />
 
+
 	<script type="text/javascript">
-		//分頁顯示
-		$(function() {
+		// 		function makeEditable(rowIndex) {
+		// 			var row = document.getElementById('row' + rowIndex);
+		// 			var cells = row.getElementsByTagName('td');
+		// 			for (var i = 0; i < cells.length - 2; i++) { // -1 to exclude the action cell
+		// 				var value = cells[i].innerText;
+		// 				cells[i].innerHTML = '<input type="text"  value="' + value + '">';
+		// 			}
+
+		// 		}
+
+		$(function() { //--------------------分頁顯示
 			var $table = $("table ");
 			var currentPage = 0; //當前頁默認值為0  
 			var pageSize = 6; //每一頁顯示的數目  
