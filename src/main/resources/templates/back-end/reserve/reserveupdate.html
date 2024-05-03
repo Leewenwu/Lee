@@ -48,7 +48,8 @@ a {
 }
 
 table {
-	width: 100%;
+	width: 90%;
+	height:150px;
 	border-collapse: collapse;
 	margin-top: 20px;
 	max-width: 100%; /* 確保表格不超過容器寬度 */
@@ -57,6 +58,8 @@ table {
 }
 
 th, td {
+	background: #FFCCCC;
+	width: 200px;
 	border: 1px solid #dddddd;
 	text-align: center;
 	padding: 10px; /* 增加間距讓表格更易於閱讀 */
@@ -69,13 +72,15 @@ th, td {
 	vertical-align: middle; /* 垂直居中 */
 }
 
-h1 {
+h1 ,h3{
 	text-align: center;
 }
 
+
 th {
 	background-color: #f9f9f9; /* 淡色背景 */
-	color: #333; /* 深色文字 */
+	color:#FFFFFF	; /* 深色文字 */
+	background: 	#FF3333;
 }
 
 tr:nth-child(even) {
@@ -147,7 +152,7 @@ tr:nth-child(even) {
 
 				<div>
 
-
+	<h3>修改狀態</h3>
 					<form th:action="@{/reserve/update}" method="post"
 						th:object="${resVO}" enctype="multipart/form-data">
 						<table>
@@ -196,12 +201,14 @@ tr:nth-child(even) {
 				</td>
 				
 				<td>
-				    <span><input type="text" th:field="*{orderNote}" /></span>
+				    <span>
+					    <textarea th:field="*{orderNote}" style="max-height: 150px;" ></textarea>
+					</span>
 				</td>
 				<td>
 				   <span>
 					    <select th:field="*{reserveOrderState}">
-					        <option th:value="0" th:text="${res.reserveOrderState == 0 ? '未認證' : (res.reserveOrderState == 1 ? '已認證' : '停權')}"></option>
+					        <option th:value="0" th:text="未認證"></option>
 					        <option th:value="1" th:text="已認證"></option>
 					        <option th:value="2" th:text="停權"></option>
 					    </select>
