@@ -21,13 +21,13 @@ public class RessionVO implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "reserve_session_id", nullable = false)
+	@Column(name = "reserve_session_id")
 	private Integer reserveSessionId;
 
-	@Column(name = "reserve_max_part", nullable = false)
+	@Column(name = "reserve_max_part")
 	private Integer reserveMaxPart = 50;
 
-	@Column(name = "session_time", nullable = false, length = 10)
+	@Column(name = "session_time", length = 10)
 	private String sessionTime;
 
 	@OneToMany(mappedBy = "ressionVO", cascade = CascadeType.ALL)

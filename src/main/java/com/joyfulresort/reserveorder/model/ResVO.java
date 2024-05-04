@@ -3,8 +3,9 @@ package com.joyfulresort.reserveorder.model;
 import java.io.Serializable;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-//import java.sql.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,16 +30,16 @@ import com.joyfulresort.reservesession.model.RessionVO;
 @DynamicUpdate
 @Table(name = "reserve_order")
 public class ResVO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "ID請勿空白")
 	@Column(name = "reserve_order_id")
 	private Integer reserveOrderId;
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@NotNull(message = "日期請勿空白")
 	@Column(name = "reserve_order_date")
-	private Date reserveOrderDate;
+	private Date reserveOrderDate  ;
 
 	@NotNull(message = "人數請勿空白")
 	@Column(name = "reserve_number")
@@ -48,21 +49,20 @@ public class ResVO implements Serializable {
 	@Column(name = "reserve_order_state")
 	private Byte reserveOrderState = 1;
 
-	
+	@NotNull(message = "日期請勿空白")
 	@Column(name = "booking_date")
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm") 
-//	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime bookingDate;
 
 	@Column(name = "order_note", length = 50)
 	private String orderNote;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
+	@JoinColumn(name = "member_id")
 	private MemberVO memberVO;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "reserve_session_id", referencedColumnName = "reserve_session_id")
+	@JoinColumn(name = "reserve_session_id")
 	private RessionVO ressionVO;
 
 	public Integer getReserveOrderId() {

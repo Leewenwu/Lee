@@ -56,10 +56,11 @@ public class IndexController_inSpringBoot {
 	}
 
 	@GetMapping("/reserve/reserveorder")
-	public String listAllEmp(Model model) {
+	public String listAllres(Model model) {
 		return "back-end/reserve/reserveorder";
 	}
 
+	
 	@ModelAttribute("MemberList")
 	protected List<MemberVO> referenceMemberList(Model model) {
 

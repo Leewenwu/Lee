@@ -31,10 +31,15 @@ a {
 	transition: background-color 0.3s, color 0.3s; /* 平滑过渡效果 */
 }
 
-.active {
-	background-color: #006B00;
-	color: #ffffff;
+input[type="submit"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
 
 .main-content {
 	margin-left: 200px;
@@ -62,6 +67,7 @@ th, td {
 	width: 200px;
 	border: 1px solid #dddddd;
 	text-align: center;
+	
 	padding: 10px; /* 增加間距讓表格更易於閱讀 */
 	font-size: 0.9em; /* 統一字體大小 */
 	word-break: break-word;
@@ -87,18 +93,15 @@ tr:nth-child(even) {
 	background-color: #f2f2f2; /* 輪流顏色以分隔行 */
 }
 
-.button-group button, input[type="submit"] {
-	padding: 8px 15px;
-	margin-right: 10px;
+.button-group button, input[type="submit"],input[type="button"] {
+	padding: 5px 0px;
+	margin-right:0px;
 	background-color: #5cb85c;
 	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-}
-
-.button-group button:hover, input[type="submit"]:hover {
-	background-color: #4cae4c;
+	width: 90px;
 }
 
 .search-form {
@@ -216,7 +219,9 @@ tr:nth-child(even) {
 				</td>
 
 
-									<td><input type="submit" value="送出修改"></td>
+									<td><input type="submit" value="送出修改">
+				<a href="reserve/reserveorder"><input type="button" value="取消"></a>
+									</td>
 								</tr>
 							</tbody>
 
