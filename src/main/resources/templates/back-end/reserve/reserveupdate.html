@@ -80,6 +80,9 @@ th, td {
 
 h1 ,h3{
 	text-align: center;
+	font-size: 30px;
+	color: red;
+	 letter-spacing: 10px; 
 }
 
 
@@ -211,9 +214,9 @@ tr:nth-child(even) {
 				<td>
 				   <span>
 					    <select th:field="*{reserveOrderState}">
-					        <option th:value="0" th:text="未認證"></option>
-					        <option th:value="1" th:text="已認證"></option>
-					        <option th:value="2" th:text="停權"></option>
+					        <option th:value="0" th:text="取消"></option>
+					        <option th:value="1" th:text="成立"></option>
+					        <option th:value="2" th:text="完成"></option>
 					    </select>
 					</span>
 				</td>
@@ -237,16 +240,16 @@ tr:nth-child(even) {
 
 	<script>
 	
-	// 獲取當前日期
-	var today = new Date();
-	var dd = String(today.getDate()).padStart(2, '0');
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); // 月份是從0開始的
-	var yyyy = today.getFullYear();
+// 	// 獲取當前日期
+// 	var today = new Date();
+// 	var dd = String(today.getDate()).padStart(2, '0');
+// 	var mm = String(today.getMonth() + 1).padStart(2, '0'); // 月份是從0開始的
+// 	var yyyy = today.getFullYear();
 
-	today = yyyy + '-' + mm + '-' + dd;
+// 	today = yyyy + '-' + mm + '-' + dd;
 
-	// 設置input元素的值為當前日期
-	document.getElementById('reserveOrderDate').value = today;
+// 	// 設置input元素的值為當前日期
+// 	document.getElementById('reserveOrderDate').value = today;
 
 	 
 	 

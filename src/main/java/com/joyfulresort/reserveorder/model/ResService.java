@@ -31,6 +31,7 @@ public class ResService {
     }
 
     public List<ResVO> getAllRes() {
-        return repository.findAll();
+//        return repository.findAll();
+    	return repository.findAllRes();
     }
 }

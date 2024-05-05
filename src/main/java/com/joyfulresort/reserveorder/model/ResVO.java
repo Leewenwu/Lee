@@ -1,11 +1,8 @@
 package com.joyfulresort.reserveorder.model;
 
 import java.io.Serializable;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,7 +23,7 @@ import com.joyfulresort.member.model.MemberVO;
 import com.joyfulresort.reservesession.model.RessionVO;
 
 @Entity
-@DynamicUpdate
+
 @Table(name = "reserve_order")
 public class ResVO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -38,13 +34,20 @@ public class ResVO implements Serializable {
 	private Integer reserveOrderId;
 
 	@NotNull(message = "日期請勿空白")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "reserve_order_date")
-	private Date reserveOrderDate  ;
+	private LocalDate reserveOrderDate =LocalDate.now() ;
+	
 
+	
+	
 	@NotNull(message = "人數請勿空白")
 	@Column(name = "reserve_number")
 	private Integer reserveNumber;
 
+	
+	
+	
 	@NotNull
 	@Column(name = "reserve_order_state")
 	private Byte reserveOrderState = 1;
@@ -73,11 +76,11 @@ public class ResVO implements Serializable {
 		this.reserveOrderId = reserveOrderId;
 	}
 
-	public Date getReserveOrderDate() {
+	public LocalDate getReserveOrderDate() {
 		return reserveOrderDate;
 	}
-
-	public void setReserveOrderDate(Date reserveOrderDate) {
+		
+	public void setReserveOrderDate(LocalDate reserveOrderDate) {
 		this.reserveOrderDate = reserveOrderDate;
 	}
 

@@ -180,24 +180,24 @@ tr:nth-child(even) {
 <!-- 				    <label for="">餐廳訂單編號:</label> -->
 <!-- 				    <input type="text" th:field="*{reserveOrderId}"  ><br><br> -->
 				
-				    <label for="">餐廳場次編號:</label>
-				    <input type="text" id="sessionid" th:field="*{ressionVO.reserveSessionId}"  readonly="readonly"><br><br>
+<!-- 				    <label for="">餐廳場次編號</label> -->
+				    <input type="hidden"   	id="sessionid" th:field="*{ressionVO.reserveSessionId}"  readonly style=  " width: 50px; background-color: lightgray" ><br><br>
 				
-				    <label for="">會員編號:</label>
+				    <label for="">會員編號</label>
 				    <input type="text" th:field="*{memberVO.memId}"><br><br>
 				
-				    <label for="">訂單日期:</label>
-				    <input type="date"  th:field="*{reserveOrderDate}"><br><br>
+				    <label for="">訂單日期</label>
+				    <input th:text="*{reserveOrderDate}"   type="hidden"   th:field="*{reserveOrderDate}"><br><br>
 				
-				    <label for="">預定人數:</label>
+				    <label for="">預定人數</label>
 				    <input type="text" th:field="*{reserveNumber}" ><br><br>
 				
-				    <label for="">預定日期:</label>
-				    <input type="datetime-local" th:field="*{bookingDate}" id="bookingDate"><br><br>
+				    <label for="" >預定日期</label>
+				    <input  type="datetime-local" th:field="*{bookingDate}" id="bookingDate"><br><br>
 			
 			
 				
-				    <label for="">備註:</label>
+				    <label for="">備註</label>
 				    <textarea id="orderNote" th:field="*{orderNote}" maxlength="100" style="max-height: 150px;"></textarea><br><br>
 				
 				   	 <button type="submit" id="submit">送出</button>

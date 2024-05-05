@@ -13,6 +13,7 @@ input[type="text"] {
 	width: 100px;
 	padding: 0px;
 	box-sizing: border-box;
+	margin-right: 10px; 
 }
 
 .page {
@@ -92,18 +93,19 @@ tr:nth-child(even) {
 }
 
 .button-group button, input[type="submit"] {
-	padding: 8px 15px;
-	margin-right: 0px;
+	padding: 5px 5px 3px 5px;
+	width:auto;
 	background-color: #5cb85c;
 	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	margin-right: 5px; 
 }
-
 .button-group button:hover, input[type="submit"]:hover {
 	background-color: #4cae4c;
 }
+
 
 .search-form {
 	margin-bottom: 20px; /* 為搜尋表格添加間距 */
@@ -114,22 +116,7 @@ tr:nth-child(even) {
 	gap: 10px; /* 元素之間的間距 */
 }
 
-.search-form input[type="text"], .search-form select {
-	padding: 5px 0px;
-	margin-right: 10px; /* 為輸入框添加間距 */
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
 
-.search-form input[type="submit"] {
-	padding: 8px 5px;
-	margin-right: 10px;
-	background-color: #5cb85c;
-	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
 /*  ------------------------ */
 .G3_content {
 	height: 1000px; /* 设置固定高度 */
@@ -154,15 +141,71 @@ tr:nth-child(even) {
 				<!-- 不同分頁內容從這開始 -->
 
 
-				<form th:action="@{/reserve/reserveadd}">
-				<input type="submit" value="新增訂單">
 
-				</form>
+
+
+				<div style="display: inline-block;">
+					<form th:action="@{/reserve/get_query}" method="post">
+						<label>訂單編號:</label> 
+						<input type="text" name="reserveOrderId" th:value="${param.reserveOrderId}"> 
+						<input	type="submit" value="查詢">
+					</form>
+				</div>
+				
+<!-- 				<div style="display: inline-block;"> -->
+<!-- 					<form th:action="@{/reserve/get_query}" method="post"> -->
+<!-- 						<label>會員編號:</label>  -->
+<!-- 						<input type="text" name="reserveOrderId"  th:value="${param.reserveOrderId}" >  -->
+<!-- 						<input type="submit" value="查詢"> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+				
+					<div style="display: inline-block;">
+					<form th:action="@{/reserve/get_query}" method="post">
+						<label>會員編號:</label> 
+						<select name="reserveOrderId">
+						<option th:each="res:${ResList}" th:text="${res.reserveOrderId}" th:value="${param.reserveOrderId}"> 
+								會多一個當前欄位選項					待修正
+						<option th:each="res:${ResListDate}" th:text="${res.reserveOrderId}"th:value="${param.reserveOrderId}"> 
+						</select>
+						<input type="submit" value="查詢">
+					</form>
+				</div>
 				
 				
+
+				<a></a>
+				
+				<div style="display: inline-block;">
+
+					<form th:action="@{/reserve/reserveadd}">
+						<input type="submit" value="新增訂單">
+					</form>
+				</div>
+
+
+ 
+<!-- <div th:if="${resVO != null}"> -->
+<!--    	 <p>員工編號: <span th:text="${resVO.reserveOrderId}"></span></p> -->
+<!--      <p>2: <span th:text="${resVO.memberVO.memId}"></span></p> -->
+<!--      <p>日期: <span th:text="${resVO.bookingDate}"></span></p> -->
+<!-- </div> -->
+
+
+<p>
+
+<span th:utext="${message}" style="color: red;">${message
+</span>
+
+
+
 				<!-- 表格開始 -->
 				<div align="center">
 
+
+
+
+							<!-- 頁碼用 隱藏 -->
 					<b><font color=red style="display: none;">
 					第<label id="currentPage">1</label>
 					/	<label id="pageNumber"></label>頁
@@ -187,21 +230,18 @@ tr:nth-child(even) {
 
 
 						<tbody>
-							<tr th:block th:each="res, stat : ${ResList}"
-								th:id="'row' + ${stat.index}">
+							<tr th:block th:each="res : ${ResList}"	>
 
 								<td th:text=" ${res.reserveOrderId} "></td>
 								<td th:text=" ${res.ressionVO.reserveSessionId}"></td>
 								<td th:text=" ${res.memberVO.memId}"></td>
 								<td th:text=" ${res.reserveOrderDate}"></td>
 								<td th:text=" ${res.reserveNumber}"></td>
-<!-- 								<td	th:text="${res.bookingDate}"></td> -->
-								
 								<td th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
 								<td th:text=" ${res.orderNote}" th:onclick="'editCell(this)'">
 								</td>
 								<td
-									th:text=" ${res.reserveOrderState == 0 ? '未認證' : (res.reserveOrderState == 1 ? '已認證' : '停權')}"></td>
+									th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
 
 
 
@@ -244,7 +284,7 @@ tr:nth-child(even) {
 		$(function() { //--------------------分頁顯示
 			var $table = $("table ");
 			var currentPage = 0; //當前頁默認值為0  
-			var pageSize = 6; //每一頁顯示的數目  
+			var pageSize = 8; //每一頁顯示的數目  
 			$table.bind('paging', function() {
 				$table.find('tbody tr').hide().slice(currentPage * pageSize,
 						(currentPage + 1) * pageSize).show();
