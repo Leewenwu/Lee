@@ -1,16 +1,19 @@
 package com.joyfulresort.reserveorder.controller;
 
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,67 +43,49 @@ public class ResqueryController {
 
 	@PostMapping("get_query")
 	public String get_query(
-//	@NotEmpty(message="請勿空白")
-	@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得大於4位數") @RequestParam("reserveOrderId") String reserveOrderId,
+	@NotEmpty(message="搜尋請勿空白")
+	@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得大於4位數") 
+			@Pattern(regexp = "^$|\\d+", message = "只能是數字") @RequestParam(value = "reserveOrderId") String reserveOrderId,
 			ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
 
 		List<ResVO> list = resSvc.getAllRes();
-		model.addAttribute("ResList", list);//為何配合顯示所有的表格
+		model.addAttribute("ResList", list);// 為配合顯示所有的表格
 		model.addAttribute("ResListData", list);// 用來顯示下拉選單
 
 		if (resVO == null) {
 			model.addAttribute("message", "沒有符合的資料");
-//			return "back-end/reserve/reserveorder"; //差無資料是否返回顯示所有
+//			return "back-end/reserve/reserveorder"; //無資料是否返回顯示所有
 		}
 
-//	
-		model.addAttribute("ResList", resVO); 
-		
-		
+		model.addAttribute("ResList", resVO);
+
 		return "back-end/reserve/reserveorder";
 	}
 
-	
-	
 	@PostMapping("get_many_query")
 	public String get_many_query(
-	@Digits(integer = 10, fraction = 0, message = "只能是數字,且不得大於10位數") 
-	@RequestParam("reserveOrderState") String reserveOrderState,
-	@RequestParam("bookingDate") String bookingDate,
-	@RequestParam("reserveOrderDate")String reserveOrderDate,
+
+			@RequestParam(value = "reserveOrderDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate reserveOrderDate,
+			@RequestParam(value = "bookingDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
 			ModelMap model) {
-	 
-		  Map<String, String> map = new HashMap<>();
-		    if (reserveOrderState != null) {
-		        map.put("reserveOrderState", reserveOrderState);
-		    }
-		    if (bookingDate != null) {
-		        map.put("bookingDate", bookingDate);
-		    }
-		    if (reserveOrderDate != null) {
-		        map.put("reserveOrderDate", reserveOrderDate);
-		    }
-		    List<ResVO> resultList = getManyQuery(map);
-		    model.addAttribute("resultList", resultList);
-	
+		List<ResVO> resVO = resSvc.findByDates(reserveOrderDate, bookingDate);
+
+		List<ResVO> list = resSvc.getAllRes();
+		model.addAttribute("ResList", list);
+		model.addAttribute("ResListData", list);
+		if (resVO.isEmpty()) {
+			model.addAttribute("message", "沒有符合的資料");
+
+//			return "back-end/reserve/reserveorder"; //無資料是否返回顯示所有
+		}
+		System.out.println(bookingDate);
+		System.out.println(reserveOrderDate);
+		model.addAttribute("ResList", resVO);
+
 		return "back-end/reserve/reserveorder";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	private List<ResVO> getManyQuery(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 	@ExceptionHandler(value = { ConstraintViolationException.class })
 	public ModelAndView handleError(HttpServletRequest req, ConstraintViolationException e, Model model) {
@@ -112,8 +97,8 @@ public class ResqueryController {
 		}
 
 		List<ResVO> list = resSvc.getAllRes();
-//		model.addAttribute("ResListDate", list);
-		model.addAttribute("ResList", list);
+		model.addAttribute("ResListData", list);
+//		model.addAttribute("ResList", list);// 錯誤時顯示所有清單
 
 		String message = strBuilder.toString();
 		return new ModelAndView("/back-end/reserve/reserveorder", "message", message);

@@ -141,13 +141,25 @@ tr:nth-child(even) {
 				<!-- 不同分頁內容從這開始 -->
 
 
+				<div style="display: inline-block;">
+					<form th:action="@{/reserve/reserveorder}">
+						<input type="submit" value="更新訂單">
+					</form>
+				</div>
+				
+				<div style="display: inline-block;">
+					<form th:action="@{/reserve/reserveadd}">
+						<input type="submit" value="新增訂單">
+					</form>
+				</div>
 
 
+<p>
 
 				<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
 						<label>訂單編號:</label> 
-						<input type="text" name="reserveOrderId" th:value="${param.reserveOrderId}"> 
+						<input type="text" name="reserveOrderId" 	> 
 						<input	type="submit" value="查詢">
 					</form>
 				</div>
@@ -167,37 +179,49 @@ tr:nth-child(even) {
 
 
 
-				<a></a>
-
-				<div style="display: inline-block;">
-					<form th:action="@{/reserve/reserveorder}">
-						<input type="submit" value="更新訂單">
-					</form>
-				</div>
 				
+
+
+<p>
 				<div style="display: inline-block;">
-					<form th:action="@{/reserve/reserveadd}">
-						<input type="submit" value="新增訂單">
+					<form th:action="@{/reserve/get_many_query}" method="post">
+
+				
+<!-- 						<label>預定日期:</label> -->
+<!-- 						 <select name="bookingDate"> -->
+<!-- 							<option th:each="res:${ResListData}" -->
+<!-- 								th:text="*{#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"> -->
+<!-- 						</select> -->
+
+
+<label>訂單日期:</label>
+<input type="date" name="reserveOrderDate" onkeydown="return false"id="reserveOrderDate" />
+
+
+<label>預定日期:</label>
+<input type="date" name="bookingDate" onkeydown="return false" id="bookingDate" />
+
+<button type="button" onclick="clearDate()">清除</button>
+
+<!-- 							<label>訂單日期:</label> -->
+<!-- 						 <select name="reserveOrderDate"> -->
+<!-- 							<option th:each="res:${ResListData}" -->
+<!-- 								th:text="${res.reserveOrderDate}"> -->
+<!-- 						</select> -->
+<script>
+function clearDate( ) {
+	 document.getElementById("reserveOrderDate").value = "";
+	    document.getElementById("bookingDate").value = "";
+	}
+</script>								
+								
+								
+								
+								
+								
+						 <input type="submit" value="查詢">
 					</form>
 				</div>
-
-
-<!-- <p>------------------------------------------------------- -->
-<!-- 				<div style="display: inline-block;"> -->
-<!-- 					<form th:action="@{/reserve/get_query}" method="post"> -->
-<!-- 						<label>訂單日期:</label> <select name="reserveOrderId"> -->
-<!-- 							<option th:each="res:${ResList}" -->
-							
-<!-- 								th:value="${res.reserveOrderId}" -->
-<!-- 								th:text="${res.reserveOrderDate}"> -->
-								
-<!-- 							<option th:each="res:${ResListData}" -->
-<!-- 								th:value="${res.reserveOrderId}" -->
-<!-- 								th:text="${res.reserveOrderDate}"> -->
-								
-<!-- 						</select> <input type="submit" value="查詢"> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
 
 
 
@@ -254,11 +278,10 @@ tr:nth-child(even) {
 								<td th:text=" ${res.reserveOrderDate}"></td>
 								<td th:text=" ${res.reserveNumber}"></td>
 								<td
-													th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
-								<td th:text=" ${res.orderNote}" th:onclick="'editCell(this)'">
-								</td>
+									th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td th:text=" ${res.orderNote}"></td>
 								<td
-													th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
+									th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
 
 
 
@@ -296,7 +319,6 @@ tr:nth-child(even) {
 		// 				var value = cells[i].innerText;
 		// 				cells[i].innerHTML = '<input type="text"  value="' + value + '">';
 		// 			}
-
 		// 		}
 
 		$(function() { //--------------------分頁顯示

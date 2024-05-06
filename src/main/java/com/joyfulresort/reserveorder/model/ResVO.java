@@ -52,7 +52,7 @@ public class ResVO implements Serializable {
 	@Column(name = "reserve_order_state")
 	private Byte reserveOrderState = 1;
 
-	@NotNull(message = "日期請勿空白")
+	@NotNull(message = "預定日期請勿空白")
 	@Column(name = "booking_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime bookingDate;
