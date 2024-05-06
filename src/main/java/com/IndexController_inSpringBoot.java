@@ -64,6 +64,14 @@ public class IndexController_inSpringBoot {
 		return list;
 	}
 
+	@ModelAttribute("ResListData")
+	protected List<ResVO> referenceResListData(Model model) {
+
+		List<ResVO> list = resSvc.getAllRes();//首次進入  讓下拉式選單抓值
+		return list;
+	}
+	
+	
 	@ModelAttribute("ResssionList")
 	protected List<RessionVO> referenceRessionList(Model model) {
 

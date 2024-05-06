@@ -31,7 +31,14 @@ public class ResService {
     }
 
     public List<ResVO> getAllRes() {
-//        return repository.findAll();
+//        return repository.findAll(); 預設方法
     	return repository.findAllRes();
     }
+
+    
+//    ------------------------------------複合查詢
+    
+    
+
+    
 }

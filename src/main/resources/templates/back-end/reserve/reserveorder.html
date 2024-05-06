@@ -10,10 +10,10 @@
 
 <style type="text/css">
 input[type="text"] {
-	width: 100px;
+	width: 60px;
 	padding: 0px;
 	box-sizing: border-box;
-	margin-right: 10px; 
+	margin-right: 0px; 
 }
 
 .page {
@@ -151,41 +151,58 @@ tr:nth-child(even) {
 						<input	type="submit" value="查詢">
 					</form>
 				</div>
-				
-<!-- 				<div style="display: inline-block;"> -->
-<!-- 					<form th:action="@{/reserve/get_query}" method="post"> -->
-<!-- 						<label>會員編號:</label>  -->
-<!-- 						<input type="text" name="reserveOrderId"  th:value="${param.reserveOrderId}" >  -->
-<!-- 						<input type="submit" value="查詢"> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
+
 				
 					<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
 						<label>會員編號:</label> 
 						<select name="reserveOrderId">
-						<option th:each="res:${ResList}" th:text="${res.reserveOrderId}" th:value="${param.reserveOrderId}"> 
-								會多一個當前欄位選項					待修正
-						<option th:each="res:${ResListDate}" th:text="${res.reserveOrderId}"th:value="${param.reserveOrderId}"> 
+
+						<option th:each="res:${ResListData}" th:text="${res.reserveOrderId}" th:value="${res.reserveOrderId}" > 
 						</select>
 						<input type="submit" value="查詢">
 					</form>
-				</div>
-				
-				
+					</div>
+
+
+
 
 				<a></a>
+
+				<div style="display: inline-block;">
+					<form th:action="@{/reserve/reserveorder}">
+						<input type="submit" value="更新訂單">
+					</form>
+				</div>
 				
 				<div style="display: inline-block;">
-
 					<form th:action="@{/reserve/reserveadd}">
 						<input type="submit" value="新增訂單">
 					</form>
 				</div>
 
 
+<!-- <p>------------------------------------------------------- -->
+<!-- 				<div style="display: inline-block;"> -->
+<!-- 					<form th:action="@{/reserve/get_query}" method="post"> -->
+<!-- 						<label>訂單日期:</label> <select name="reserveOrderId"> -->
+<!-- 							<option th:each="res:${ResList}" -->
+							
+<!-- 								th:value="${res.reserveOrderId}" -->
+<!-- 								th:text="${res.reserveOrderDate}"> -->
+								
+<!-- 							<option th:each="res:${ResListData}" -->
+<!-- 								th:value="${res.reserveOrderId}" -->
+<!-- 								th:text="${res.reserveOrderDate}"> -->
+								
+<!-- 						</select> <input type="submit" value="查詢"> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+
+
+
  
-<!-- <div th:if="${resVO != null}"> -->
+<!-- <div th:if="${res != null}">    單獨顯示查詢資料用--> 
 <!--    	 <p>員工編號: <span th:text="${resVO.reserveOrderId}"></span></p> -->
 <!--      <p>2: <span th:text="${resVO.memberVO.memId}"></span></p> -->
 <!--      <p>日期: <span th:text="${resVO.bookingDate}"></span></p> -->
@@ -194,8 +211,7 @@ tr:nth-child(even) {
 
 <p>
 
-<span th:utext="${message}" style="color: red;">${message
-</span>
+<span th:utext="${message}" style="color: red;">${message</span>
 
 
 
@@ -230,26 +246,27 @@ tr:nth-child(even) {
 
 
 						<tbody>
-							<tr th:block th:each="res : ${ResList}"	>
+							<tr th:block th:each="res : ${ResList}">
 
 								<td th:text=" ${res.reserveOrderId} "></td>
 								<td th:text=" ${res.ressionVO.reserveSessionId}"></td>
 								<td th:text=" ${res.memberVO.memId}"></td>
 								<td th:text=" ${res.reserveOrderDate}"></td>
 								<td th:text=" ${res.reserveNumber}"></td>
-								<td th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td
+													th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
 								<td th:text=" ${res.orderNote}" th:onclick="'editCell(this)'">
 								</td>
 								<td
-									th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
+													th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
 
 
 
 								<td>
 									<form method="post" th:action="@{/reserve/get_for_update}">
 										<input type="hidden" name="reserveOrderId"
-											th:value="${res.reserveOrderId}"> <input
-											type="submit" value="修改">
+															th:value="${res.reserveOrderId}"> <input
+															type="submit" value="修改">
 									</form>
 								</td>
 							</tr>
@@ -263,7 +280,8 @@ tr:nth-child(even) {
 
 
 
-			</div>
+			
+							</div>
 		</div>
 	</div>
 	<th:block th:insert="~{/back-end/htmlfile/content2}" />
