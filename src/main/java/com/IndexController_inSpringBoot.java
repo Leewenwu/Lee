@@ -28,9 +28,19 @@ public class IndexController_inSpringBoot {
 	ResService resSvc;
 
 
-	
+	@GetMapping("/test")
+	public String test(Model model) {
+		return "front-end/test";
+	}
 
-
+	@GetMapping("/origin")
+	public String exp(Model model) {
+		return "front-end/origin";
+	}
+	@GetMapping("/index")
+	public String index(Model model) {
+		return "index";
+	}
 
 	@GetMapping("/main_page")
 	public String indexWithParam(@RequestParam(name = "name", required = false, defaultValue = "") String name,
@@ -39,6 +49,8 @@ public class IndexController_inSpringBoot {
 		return "back-end/main_page"; // view
 	}
 
+	
+	
 	@GetMapping("/member/member")
 	public String member(Model model) {
 		return "back-end/member/member";

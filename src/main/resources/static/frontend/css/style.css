@@ -371,7 +371,7 @@ button {
      position: relative;
      width: 100%; /* 調整寬度為80% */
      margin: 0 auto; /* 加上此行使跑馬燈在頁面中居中 */
-     max-height: 500px; /* 限制最大高度 */
+     max-height: 550px; /* 限制最大高度 */
      overflow: hidden; /* 隱藏超出部分 */
  
      
