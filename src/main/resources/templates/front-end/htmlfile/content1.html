@@ -1,54 +1,67 @@
 <!-- 頁面頭部 -->
 	<header>
 		<!-- 頭部內容 -->
-		<div class="header">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-						<div class="full">
-							<div class="center-desk">
-								<div class="logo">
-									<a href="index.html"> <img
-										th:src="@{/frontend/images/JOYFUL RESORT - MarkMaker Logo.png}"
-										alt="">
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-						<nav class="navigation navbar navbar-expand-md navbar-dark ">
-							<button class="navbar-toggler" type="button"
-								data-toggle="collapse" data-target="#navbarsExample04"
-								aria-controls="navbarsExample04" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="collapse navbar-collapse" id="navbarsExample04">
-								<ul class="navbar-nav mr-auto">
-									<li class="nav-item"><a class="nav-link active fw-bold"
-										href="index.html">首頁</a> <!-- 包含  最新消息 媒體報導...  --></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="contact.html">關於我們</a></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="room.html">飯店設施</a></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="gallery.html">線上訂房</a></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="blog.html">活動報名</a></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="restaurant.html">餐飲服務</a></li>
-									<li class="nav-item"><a class="nav-link  fw-bold"
-										href="conference.html">宴會會議</a></li>
-									<li class="nav-item"><a class="nav-link fw-bold"
-										href="log.html">會員專區</a></li>
-								</ul>
-							</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="header position-fixed top-0 z-3 bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                    <div class="full">
+                        <div class="center-desk">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img th:src="@{/frontend/images/JOYFUL-logo-white.png}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                    <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                            <ul class="navbar-nav mr-auto">
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="index.html">首頁</a>
+                                    <!-- 包含 關於我們 最新消息 媒體報導...  -->
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="about.html">關於我們</a>
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="room.html">飯店設施</a>
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="gallery.html">線上訂房</a>
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="blog.html">活動報名</a>
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="/conference">宴會會議</a>
+                                    <!-- 包含常見問題 -->
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" href="log.html">會員登入</a>
+                                </li>
+                                <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 		
 			<!-- 圖片跑馬燈 & 註解日期 -->
 	<section class="banner_main">
