@@ -167,7 +167,7 @@ tr:nth-child(even) {
 				
 					<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
-						<label>會員編號:</label> 
+						<label></label> 
 						<select name="reserveOrderId">
 
 						<option th:each="res:${ResListData}" th:text="${res.reserveOrderId}" th:value="${res.reserveOrderId}" > 

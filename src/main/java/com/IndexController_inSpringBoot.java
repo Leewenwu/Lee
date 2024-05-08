@@ -1,10 +1,8 @@
 package com;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.member.model.MemberVO;
+import com.joyfulresort.reservecontent.model.ResContentVO;
+import com.joyfulresort.reservecontent.model.RescontentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
@@ -26,7 +26,18 @@ public class IndexController_inSpringBoot {
 	RessionService ressionSvc;
 	@Autowired
 	ResService resSvc;
+	@Autowired
+	RescontentService rescontentSvc;
 
+	@GetMapping("/restaurant/main")
+	public String restaurant(Model model) {
+		return "front-end/restaurant/main";
+	}
+	
+	@GetMapping("/reserve/reservecontent")
+	public String reservecontent(Model model) {
+		return "back-end/reserve/reservecontent";
+	}
 
 	@GetMapping("/test")
 	public String test(Model model) {
@@ -37,6 +48,7 @@ public class IndexController_inSpringBoot {
 	public String exp(Model model) {
 		return "front-end/origin";
 	}
+
 	@GetMapping("/index")
 	public String index(Model model) {
 		return "index";
@@ -49,8 +61,6 @@ public class IndexController_inSpringBoot {
 		return "back-end/main_page"; // view
 	}
 
-	
-	
 	@GetMapping("/member/member")
 	public String member(Model model) {
 		return "back-end/member/member";
@@ -61,7 +71,6 @@ public class IndexController_inSpringBoot {
 		return "back-end/reserve/reserveorder";
 	}
 
-	
 	@ModelAttribute("MemberList")
 	protected List<MemberVO> referenceMemberList(Model model) {
 
@@ -79,15 +88,20 @@ public class IndexController_inSpringBoot {
 	@ModelAttribute("ResListData")
 	protected List<ResVO> referenceResListData(Model model) {
 
-		List<ResVO> list = resSvc.getAllRes();//首次進入  讓下拉式選單抓值
+		List<ResVO> list = resSvc.getAllRes();// 首次進入 讓下拉式選單抓資料
 		return list;
 	}
-	
-	
+
 	@ModelAttribute("ResssionList")
 	protected List<RessionVO> referenceRessionList(Model model) {
 
 		List<RessionVO> list = ressionSvc.getAllRessions();
+		return list;
+	}
+	@ModelAttribute("ContentList")
+	protected List<ResContentVO> referenceContentList(Model model) {
+
+		List<ResContentVO> list = rescontentSvc.getAllContent();
 		return list;
 	}
 

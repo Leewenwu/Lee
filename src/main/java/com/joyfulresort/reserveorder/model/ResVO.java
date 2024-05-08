@@ -46,8 +46,6 @@ public class ResVO implements Serializable {
 	private Integer reserveNumber;
 
 	
-	
-	
 	@NotNull
 	@Column(name = "reserve_order_state")
 	private Byte reserveOrderState = 1;
@@ -67,7 +65,8 @@ public class ResVO implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "reserve_session_id")
 	private RessionVO ressionVO;
-
+	
+	
 	public Integer getReserveOrderId() {
 		return reserveOrderId;
 	}

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joyfulresort.member.model.MemberService;
+import com.joyfulresort.reservecontent.model.ResContentVO;
+import com.joyfulresort.reservecontent.model.RescontentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
@@ -37,16 +39,26 @@ public class ResController {
 	RessionService ressionSvc;
 	@Autowired
 	ResService resSvc;
+	@Autowired
+	RescontentService rescontentSvc;
 	
 @GetMapping("reserveadd")
-public String addreserve(ModelMap model) {
+public String reserveadd(ModelMap model) {
 	ResVO resVO = new ResVO();
 	model.addAttribute("resVO",resVO);
-	return "back-end/reserve/reserveadd";
-			
+	return "back-end/reserve/reserveadd";	
 	
 }
-	
+
+
+//@GetMapping("reservecontent")
+//public String reservecontent(ModelMap model) {
+//ResContentVO ContentVO = new ResContentVO();
+//model.addAttribute("contentVO",ContentVO);
+//return "back-end/reserve/reservecontent";	
+
+//}	
+  
 	
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {

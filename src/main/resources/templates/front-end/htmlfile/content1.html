@@ -1,4 +1,12 @@
 <!-- 頁面頭部 -->
+		<!-- 頁面加載動畫 -->
+	<div class="loader_bg">
+		<div class="loader">
+<!-- 			<img th:src="@{/frontend/images/loading.gif}" alt="#" /> -->
+		</div>
+	</div>
+	
+	
 	<header>
 		<!-- 頭部內容 -->
 	<div class="header position-fixed top-0 z-3 bg-black">
@@ -26,7 +34,7 @@
                             <ul class="navbar-nav mr-auto">
                                 <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bold" style="color: white" href="index.html">首頁</a>
+                                    <a class="nav-link fw-bold" style="color: white" th:href="@{/test}">首頁</a>
                                     <!-- 包含 關於我們 最新消息 媒體報導...  -->
                                 </li>
                                 <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
@@ -48,8 +56,14 @@
                                 <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
                                 <li class="nav-item">
                                     <a class="nav-link fw-bold" style="color: white" href="/conference">宴會會議</a>
-                                    <!-- 包含常見問題 -->
+                                 
                                 </li>
+                                  <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" style="color: white" th:href="@{/restaurant/main}" >餐飲服務</a>
+                                 
+                                </li>
+                              
                                 <hr style="border-left: 1px solid white; height: 35px; margin-top: 0">
                                 <li class="nav-item">
                                     <a class="nav-link fw-bold" style="color: white" href="log.html">會員登入</a>
@@ -124,6 +138,5 @@
             </div>
          </div> -->
 	</section>
-	<!-- 圖片跑馬燈結束 -->
+	
 	</header>
-	<!-- header結束 -->
