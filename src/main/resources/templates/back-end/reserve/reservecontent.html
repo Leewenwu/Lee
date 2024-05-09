@@ -12,7 +12,6 @@
 .form-container {
 	max-width: 1000px;
 	margin: 0;
-
 	border: 0px solid #ccc;
 	border-radius: 5px;
 }
@@ -113,7 +112,6 @@ th {
 	background-color: #CCDDFF; /* 淡色背景 */
 	color: #333; /* 深色文字 */
 }
-
 </style>
 
 </head>
@@ -130,7 +128,7 @@ th {
 
 
 				<div>
-					<form th:action="@{/reserve/reserveadd}">
+					<form th:action="@{/reserve/reservecontentadd}" >
 						<input type="submit" value="新增內容">
 					</form>
 				</div>
@@ -159,9 +157,13 @@ th {
 								<td><img th:src="@{/reserve/DBGifReader}+'?id='+ ${res.id}"
 									style="width: 200px; height: 200px;"></td>
 								<td><div>
-										<form th:action="@{/reserve/reserveorder}">
-											<input type="submit" value="修改內容">
+
+										<form method="post"
+											th:action="@{/reserve/get_for_contentupdate}">
+											<input type="hidden" name="id" th:value="${res.id}">
+											<input type="submit" value="修改">
 										</form>
+
 									</div></td>
 
 							</tr>

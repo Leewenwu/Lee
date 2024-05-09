@@ -159,7 +159,7 @@ tr:nth-child(even) {
 				<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
 						<label>訂單編號:</label> 
-						<input type="text" name="reserveOrderId" 	> 
+						<input type="text" name="reserveOrderId" > 
 						<input	type="submit" value="查詢">
 					</form>
 				</div>
@@ -288,8 +288,8 @@ function clearDate( ) {
 								<td>
 									<form method="post" th:action="@{/reserve/get_for_update}">
 										<input type="hidden" name="reserveOrderId"
-															th:value="${res.reserveOrderId}"> <input
-															type="submit" value="修改">
+															th:value="${res.reserveOrderId}"> 
+												<input	type="submit" value="修改">
 									</form>
 								</td>
 							</tr>

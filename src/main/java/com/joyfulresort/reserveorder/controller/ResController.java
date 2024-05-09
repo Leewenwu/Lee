@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.multi.MultiFileChooserUI;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +47,13 @@ public class ResController {
 public String reserveadd(ModelMap model) {
 	ResVO resVO = new ResVO();
 	model.addAttribute("resVO",resVO);
+
 	return "back-end/reserve/reserveadd";	
 	
 }
 
 
-//@GetMapping("reservecontent")
-//public String reservecontent(ModelMap model) {
-//ResContentVO ContentVO = new ResContentVO();
-//model.addAttribute("contentVO",ContentVO);
-//return "back-end/reserve/reservecontent";	
 
-//}	
   
 	
 	@PostMapping("get_for_update")
@@ -72,7 +68,8 @@ public String reserveadd(ModelMap model) {
 	}
 
 	@PostMapping("update")
-	public String update(@Valid ResVO resVO, BindingResult result, ModelMap model) throws IOException {
+	public String update(@Valid ResVO resVO, BindingResult result, ModelMap model)
+		 throws IOException {
 		if(result.hasErrors()) {
 			System.out.println(result.getFieldError());
 			return"back-end/404";
@@ -93,9 +90,9 @@ public String reserveadd(ModelMap model) {
 	@PostMapping("insert")
 	public String insert(@Valid ResVO rseVO, BindingResult result,HttpServletRequest request, ModelMap model)throws IOException {
 		
-		if(result.hasErrors()) {
-			return"back-end/404";
-		}
+//		if(result.hasErrors()) {
+//			return"back-end/404";
+//		}
 		
 		resSvc.addRes(rseVO);
 		

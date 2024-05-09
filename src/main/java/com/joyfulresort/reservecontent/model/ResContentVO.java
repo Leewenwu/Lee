@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "reserve_content")
@@ -19,6 +22,8 @@ public class ResContentVO implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
+//	@NotEmpty(message = "內容文字請勿空白!") 
+//	@Length(min = 20, max = 200, message = "文字長度應在10到100字之間") 
 	@Column(name = "reserve_text")
 	private String reserveText;
 

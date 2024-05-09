@@ -45,7 +45,7 @@ public class ResqueryController {
 	public String get_query(
 	@NotEmpty(message="搜尋請勿空白")
 	@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得大於4位數") 
-			@Pattern(regexp = "^$|\\d+", message = "只能是數字") @RequestParam(value = "reserveOrderId") String reserveOrderId,
+		@Pattern(regexp = "^$|\\d+", message = "只能是數字") @RequestParam(value = "reserveOrderId") String reserveOrderId,
 			ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
@@ -80,8 +80,7 @@ public class ResqueryController {
 
 //			return "back-end/reserve/reserveorder"; //無資料是否返回顯示所有
 		}
-		System.out.println(bookingDate);
-		System.out.println(reserveOrderDate);
+		
 		model.addAttribute("ResList", resVO);
 
 		return "back-end/reserve/reserveorder";
@@ -99,7 +98,6 @@ public class ResqueryController {
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResListData", list);
 //		model.addAttribute("ResList", list);// 錯誤時顯示所有清單
-
 		String message = strBuilder.toString();
 		return new ModelAndView("/back-end/reserve/reserveorder", "message", message);
 

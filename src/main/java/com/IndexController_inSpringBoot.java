@@ -29,30 +29,21 @@ public class IndexController_inSpringBoot {
 	@Autowired
 	RescontentService rescontentSvc;
 
-	@GetMapping("/restaurant/main")
-	public String restaurant(Model model) {
-		return "front-end/restaurant/main";
-	}
-	
-	@GetMapping("/reserve/reservecontent")
-	public String reservecontent(Model model) {
-		return "back-end/reserve/reservecontent";
-	}
-
-	@GetMapping("/test")
-	public String test(Model model) {
-		return "front-end/test";
-	}
-
-	@GetMapping("/origin")
-	public String exp(Model model) {
-		return "front-end/origin";
-	}
-
 	@GetMapping("/index")
 	public String index(Model model) {
 		return "index";
 	}
+
+	@GetMapping("/joyfulresort")
+	public String test(Model model) {
+		return "front-end/test";
+	}
+
+	@GetMapping("/joyfulresort/restaurant")
+	public String restaurant(Model model) {
+		return "front-end/restaurant/main";
+	}
+	
 
 	@GetMapping("/main_page")
 	public String indexWithParam(@RequestParam(name = "name", required = false, defaultValue = "") String name,
@@ -65,12 +56,20 @@ public class IndexController_inSpringBoot {
 	public String member(Model model) {
 		return "back-end/member/member";
 	}
-
+ 
 	@GetMapping("/reserve/reserveorder")
 	public String listAllres(Model model) {
 		return "back-end/reserve/reserveorder";
 	}
 
+	@GetMapping("/reserve/reservecontent")
+	public String reservecontent(Model model) {
+		return "back-end/reserve/reservecontent";
+	}
+	
+//	----------------------------------------------
+	
+	
 	@ModelAttribute("MemberList")
 	protected List<MemberVO> referenceMemberList(Model model) {
 
