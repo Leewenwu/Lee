@@ -128,7 +128,7 @@ th {
 
 
 				<div>
-					<form th:action="@{/reserve/reservecontentadd}" >
+					<form th:action="@{/reserve/reservecontentadd}">
 						<input type="submit" value="新增內容">
 					</form>
 				</div>
@@ -142,7 +142,7 @@ th {
 							<tr>
 								<th>文字內容</th>
 								<th>圖片</th>
-
+								<th></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -156,15 +156,21 @@ th {
 								<td th:text=" ${res.reserveText} "></td>
 								<td><img th:src="@{/reserve/DBGifReader}+'?id='+ ${res.id}"
 									style="width: 200px; height: 200px;"></td>
-								<td><div>
+								<td>
+									<form method="post"
+										th:action="@{/reserve/get_for_contentupdate}">
+										<input type="hidden" name="id" th:value="${res.id}"> <input
+											type="submit" value="修改">
+									</form>
+								</td>
+								<td>
 
-										<form method="post"
-											th:action="@{/reserve/get_for_contentupdate}">
-											<input type="hidden" name="id" th:value="${res.id}">
-											<input type="submit" value="修改">
-										</form>
+									<form method="post" th:action="@{/reserve/contentdelete}">
+										<input type="hidden" name="id" th:value="${res.id}"> <input
+											type="submit" value="刪除">
+									</form>
 
-									</div></td>
+								</td>
 
 							</tr>
 						</tbody>

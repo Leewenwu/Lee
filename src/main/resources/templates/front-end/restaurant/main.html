@@ -14,10 +14,11 @@
 	padding-left: 50px;
 	padding-right: 50px;
 	padding-top: 30px;
+	/* 	 border: 2px solid #333;  */
 }
 
 .logo img {
-/* 	width: 100%; */
+	/* 	width: 100%; */
 	height: 80px;
 	margin-top: -10px;
 }
@@ -79,9 +80,6 @@
 	background-color: #50c3fd; /* 懸停時的背景顏色 */
 	color: white; /* 懸停時的文字顏色 */
 }
-
-
-
 </style>
 
 </head>
@@ -93,37 +91,36 @@
 	<div th:fragment="content">
 
 
-		<div class="container" style="padding-top: 40px;">
-		
+		<div class="container"  style="padding-top: 40px; ">
+
 			<h2 class="text-center p-0 lora-type m-0" style="color: #847674;"
 				data-aos="fade-up" data-aos-duration="1000">概覽</h2>
 			<P class="text-center h5 mb-5 fw-bold" data-aos="fade-up"
 				data-aos-duration="2000"></P>
 			<div class="row">
-				<div class="col-lg-6 content">
-					<div class="about-text">
+				<div class="col-lg-6 content" >
+					<div class="about-text" >
 						<h4 data-aos="fade-right" data-aos-duration="1000">奢華餐飲體驗，極致享受</h4>
 						<p>
 						<div class="title-frame" th:block th:each="res:${ContentList}"
-						 style="margin-bottom: 100px;">
-							
-						
-						<span th:text=" ${res.reserveText}"  
-  					 style="font-size: 20px; color: #847674;  line-height: 2.5em  !important;"
-						 data-aos="fade-right"   >
-						 </span> 
-						
-						
-<!-- 							<p   class="" style="color: #847674;" data-aos="fade-right" -->
-<!-- 								data-aos-duration="1000" > -->
-<!-- 								在JOYFUL餐廳，我們提供不僅是餐點，更是一場奢華的感官盛宴。餐廳設計結合了現代與傳統元素，創造出一個既舒適又富有藝術氛圍的空間。每一道菜都由我們的星級主廚精心烹製，從選料到擺盤，每一細節都力求完美，確保為您提供無與倫比的用餐體驗。 -->
-<!-- 							</p> -->
-							
-<!-- 						<h5 data-aos="fade-right" data-aos-duration="1000">專注細節，追求完美</h5> -->
-<!-- 							<p style="color: #847674;" data-aos="fade-right" -->
-<!-- 								data-aos-duration="1000"> -->
-<!-- 								我們在JOYFUL餐廳不斷創新菜品，引入國際化的美食元素，同時也重視地方特色，融合本土的新鮮食材。餐廳的服務團隊經過專業培訓，致力於提供細緻入微的服務，從迎賓到送行，每一個環節都讓您感受到尊貴與尊重。 -->
-<!-- 							</p> -->
+							style="margin-bottom: 100px;">
+
+
+							<span th:text=" ${res.reserveText}"
+								style="font-size: 20px; color: #847674; line-height: 2.5em !important;"
+								data-aos="fade-right"> </span>
+
+
+							<!-- 							<p   class="" style="color: #847674;" data-aos="fade-right" -->
+							<!-- 								data-aos-duration="1000" > -->
+							<!-- 								在JOYFUL餐廳，我們提供不僅是餐點，更是一場奢華的感官盛宴。餐廳設計結合了現代與傳統元素，創造出一個既舒適又富有藝術氛圍的空間。每一道菜都由我們的星級主廚精心烹製，從選料到擺盤，每一細節都力求完美，確保為您提供無與倫比的用餐體驗。 -->
+							<!-- 							</p> -->
+
+							<!-- 						<h5 data-aos="fade-right" data-aos-duration="1000">專注細節，追求完美</h5> -->
+							<!-- 							<p style="color: #847674;" data-aos="fade-right" -->
+							<!-- 								data-aos-duration="1000"> -->
+							<!-- 								我們在JOYFUL餐廳不斷創新菜品，引入國際化的美食元素，同時也重視地方特色，融合本土的新鮮食材。餐廳的服務團隊經過專業培訓，致力於提供細緻入微的服務，從迎賓到送行，每一個環節都讓您感受到尊貴與尊重。 -->
+							<!-- 							</p> -->
 						</div>
 
 						<div style="height: 120px;" data-aos="fade-up"
@@ -131,7 +128,6 @@
 							<!-- 可以調整height的值來改變間隔大小 -->
 							<!-- 這個div是空的，用來創造間隔 -->
 
-							<button onclick="" class="hover-button">我要訂位</button>
 
 
 
@@ -148,10 +144,11 @@
 
 				<div class="col-md-6">
 					<div class="about_img w-100" data-aos="fade-right"
-						data-aos-duration="1000" style="margin-bottom: 20px; "
-						th:block th:each="res:${ContentList}" >
+						data-aos-duration="1000" style="margin-bottom: 20px;" th:block
+						th:each="res:${ContentList}">
 						<figure>
-							<img th:src="@{/reserve/DBGifReader}+'?id='+ ${res.id}" alt="#" style="height: 380px" />
+							<img th:src="@{/reserve/DBGifReader}+'?id='+ ${res.id}" alt="#"
+								style="height: 380px" />
 						</figure>
 					</div>
 					<p></p>

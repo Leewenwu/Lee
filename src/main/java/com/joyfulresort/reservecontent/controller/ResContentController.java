@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,7 +89,7 @@ public class ResContentController {
 		if (parts[0].isEmpty()) {
 			model.addAttribute("errorMessage", "請上傳內容照片");
 
-		} else {	
+		} else {
 			for (MultipartFile multipartFile : parts) {
 				byte[] buf = multipartFile.getBytes();
 				contentVO.setReserveImage(buf);
@@ -110,6 +108,20 @@ public class ResContentController {
 		model.addAttribute("success", "新增成功");
 
 		return "redirect:/reserve/reservecontent";
+	}
+
+	@PostMapping("contentdelete")
+	public String contentdelete(@RequestParam("id") String id, ModelMap model) {
+		rescontentSvc.deleteContent(Integer.valueOf(id));
+		;
+
+		List<ResContentVO> list = rescontentSvc.getAllContent();
+		model.addAttribute("ContentList", list);
+
+		model.addAttribute("success", "刪除	成功");
+
+		return "redirect:/reserve/reservecontent";
+
 	}
 
 	public BindingResult removeFieldError(ResContentVO contentVO, BindingResult result, String removedFieldname) {
