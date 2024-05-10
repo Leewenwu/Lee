@@ -14,7 +14,6 @@
 	padding-left: 50px;
 	padding-right: 50px;
 	padding-top: 30px;
-	/* 	 border: 2px solid #333;  */
 }
 
 .logo img {
@@ -91,15 +90,15 @@
 	<div th:fragment="content">
 
 
-		<div class="container"  style="padding-top: 40px; ">
+		<div class="container" style="padding-top: 40px;">
 
 			<h2 class="text-center p-0 lora-type m-0" style="color: #847674;"
 				data-aos="fade-up" data-aos-duration="1000">概覽</h2>
 			<P class="text-center h5 mb-5 fw-bold" data-aos="fade-up"
 				data-aos-duration="2000"></P>
 			<div class="row">
-				<div class="col-lg-6 content" >
-					<div class="about-text" >
+				<div class="col-lg-6 content">
+					<div class="about-text">
 						<h4 data-aos="fade-right" data-aos-duration="1000">奢華餐飲體驗，極致享受</h4>
 						<p>
 						<div class="title-frame" th:block th:each="res:${ContentList}"
@@ -134,7 +133,9 @@
 
 
 
-
+						<form th:action="@{/joyfulresort/reservefrontadd}" >
+							<button onclick=""  class="hover-button">我要訂位</button>
+							</form>
 						</div>
 					</div>
 				</div>

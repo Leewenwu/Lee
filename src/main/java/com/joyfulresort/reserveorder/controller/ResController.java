@@ -1,7 +1,7 @@
 package com.joyfulresort.reserveorder.controller;
 
 import java.io.IOException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +28,6 @@ import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
 
-
-
 @Controller
 @RequestMapping("/reserve")
 public class ResController {
@@ -42,20 +40,15 @@ public class ResController {
 	ResService resSvc;
 	@Autowired
 	RescontentService rescontentSvc;
-	
-@GetMapping("reserveadd")
-public String reserveadd(ModelMap model) {
-	ResVO resVO = new ResVO();
-	model.addAttribute("resVO",resVO);
 
-	return "back-end/reserve/reserveadd";	
-	
-}
+	@GetMapping("reservebackadd") // 後端新增訂單
+	public String reservebackadd(ModelMap model) {
+		ResVO resVO = new ResVO();
+		model.addAttribute("resVO", resVO);
 
+		return "back-end/reserve/reserveadd";
+	}
 
-
-  
-	
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {
 
@@ -63,22 +56,20 @@ public String reserveadd(ModelMap model) {
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);
 		model.addAttribute("resVO", resVO);
-	
+
 		return "back-end/reserve/reserveupdate";
 	}
 
 	@PostMapping("update")
-	public String update(@Valid ResVO resVO, BindingResult result, ModelMap model)
-		 throws IOException {
-		if(result.hasErrors()) {
+	public String update(@Valid ResVO resVO, BindingResult result, ModelMap model) throws IOException {
+		if (result.hasErrors()) {
 			System.out.println(result.getFieldError());
-			return"back-end/404";
+			return "back-end/404";
 		}
-		
-		
+
 		resSvc.updateRes(resVO);
-		
-		List<ResVO> resList = resSvc.getAllRes(); 
+
+		List<ResVO> resList = resSvc.getAllRes();
 		model.addAttribute("ResList", resList);
 		resVO = resSvc.getOneRes(Integer.valueOf(resVO.getReserveOrderId()));
 		model.addAttribute("resVO", resVO);
@@ -86,26 +77,25 @@ public String reserveadd(ModelMap model) {
 		return "redirect:/reserve/reserveorder";
 	}
 
+
 	
 	@PostMapping("insert")
-	public String insert(@Valid ResVO rseVO, BindingResult result,HttpServletRequest request, ModelMap model)throws IOException {
-		
+	public String insert(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
+			throws IOException {
+
 //		if(result.hasErrors()) {
 //			return"back-end/404";
 //		}
-		
-		resSvc.addRes(rseVO);
-		
+		resSvc.addRes(resVO);
+
 		List<ResVO> list = resSvc.getAllRes();
-		model.addAttribute("ResList",list);
-		model.addAttribute("success","新增成功");
+		model.addAttribute("ResList", list);
+		model.addAttribute("success", "新增成功");
 		return "redirect:/reserve/reserveorder";
 	}
 	
 	
-	
-	
-	
+
 	public BindingResult removeFieldError(ResVO resVO, BindingResult result, String removedFieldname) {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
 				.filter(fieldname -> !fieldname.getField().equals(removedFieldname)).collect(Collectors.toList());
@@ -115,6 +105,6 @@ public String reserveadd(ModelMap model) {
 			result.addError(fieldError);
 		}
 		return result;
-		
+
 	}
 }

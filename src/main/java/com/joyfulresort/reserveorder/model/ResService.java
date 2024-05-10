@@ -38,25 +38,40 @@ public class ResService {
 		return repository.findAllRes();
 	}
 
+//	人數判斷	
+
+//	public Integer countNumber(LocalDate date) {
+//		Integer totalNumber = repository.countNumber(date);
+//		return totalNumber;
+//	}
+
+	public Integer countNumber(LocalDate bookingDate) {
+		if (bookingDate != null) {
+
+			return repository.countNumber(bookingDate);
+		}
+		return -1; 
+
+	}
+
 //    ------------------------------------複合查詢
 
 	public List<ResVO> findByDates(LocalDate reserveOrderDate, LocalDate bookingDate) {
 
 		if (reserveOrderDate != null && bookingDate != null) {
 			// 兩個日期都存在，進行複合查詢
-			System.out.println("4");
+
 			return repository.findByDates(reserveOrderDate, bookingDate);
 		} else if (reserveOrderDate != null) {
-			System.out.println("3");
+
 			// 只有 reserveOrderDate 存在，單獨查詢 reserveOrderDate
 			return repository.findByReserveOrderDate(reserveOrderDate);
 		} else if (bookingDate != null) {
-			System.out.println("2");
+
 			// 只有 bookingDate 存在，單獨查詢 bookingDate
 			return repository.findByBookingDate(bookingDate);
-			
+
 		} else {
-			System.out.println("1");
 			return repository.findAllRes();
 		}
 

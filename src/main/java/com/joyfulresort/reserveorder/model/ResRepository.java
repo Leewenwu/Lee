@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ResRepository extends JpaRepository<ResVO, Integer> {
@@ -28,6 +29,11 @@ public interface ResRepository extends JpaRepository<ResVO, Integer> {
 	@Transactional
     @Query(value = "SELECT * FROM reserve_order WHERE booking_date LIKE %?1%", nativeQuery = true)
 	List<ResVO> findByBookingDate(LocalDate bookingDate);	
+	
+	
+	@Transactional
+    @Query(value ="SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1%" ,nativeQuery = true)
+    Integer countNumber(LocalDate bookingDate);
 	
 	
 //	List<ResVO> findByTimeBetween(Date TimeStart,Date TimeEnd);

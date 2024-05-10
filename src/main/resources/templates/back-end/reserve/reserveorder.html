@@ -13,7 +13,7 @@ input[type="text"] {
 	width: 60px;
 	padding: 0px;
 	box-sizing: border-box;
-	margin-right: 0px; 
+	margin-right: 0px;
 }
 
 .page {
@@ -80,7 +80,6 @@ h1 {
 td {
 	/*width: 100px;  固定寬度 */
 	word-wrap: break-word; /* 自動換行 */
-	
 }
 
 th {
@@ -94,18 +93,18 @@ tr:nth-child(even) {
 
 .button-group button, input[type="submit"] {
 	padding: 5px 5px 3px 5px;
-	width:auto;
+	width: auto;
 	background-color: #5cb85c;
 	color: white;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	margin-right: 5px; 
+	margin-right: 5px;
 }
+
 .button-group button:hover, input[type="submit"]:hover {
 	background-color: #4cae4c;
 }
-
 
 .search-form {
 	margin-bottom: 20px; /* 為搜尋表格添加間距 */
@@ -115,8 +114,17 @@ tr:nth-child(even) {
 	flex-wrap: wrap; /* 確保在較小的屏幕上元素可以換行 */
 	gap: 10px; /* 元素之間的間距 */
 }
-
-
+.cancel {
+    pointer-events: none;
+    opacity: 0.7;
+    color:#FF5151	;
+}
+.success{
+/* 	 opacity: 0.5; */
+/* 	 pointer-events: none; */
+	  font-weight: bold;
+	color: 	#97CBFF	;
+}
 /*  ------------------------ */
 .G3_content {
 	height: 1000px; /* 设置固定高度 */
@@ -146,109 +154,110 @@ tr:nth-child(even) {
 						<input type="submit" value="更新訂單">
 					</form>
 				</div>
-				
+
 				<div style="display: inline-block;">
-					<form th:action="@{/reserve/reserveadd}">
+					<form th:action="@{/reserve/reservebackadd}">
 						<input type="submit" value="新增訂單">
 					</form>
 				</div>
 
 
-<p>
-
+				<p>
 				<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
-						<label>訂單編號:</label> 
-						<input type="text" name="reserveOrderId" > 
-						<input	type="submit" value="查詢">
+						<label>訂單編號:</label> <input type="text" name="reserveOrderId">
+						<input type="submit" value="查詢">
 					</form>
 				</div>
 
-				
-					<div style="display: inline-block;">
+
+				<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_query}" method="post">
-						<label></label> 
-						<select name="reserveOrderId">
+						<label></label> <select name="reserveOrderId">
 
-						<option th:each="res:${ResListData}" th:text="${res.reserveOrderId}" th:value="${res.reserveOrderId}" > 
-						</select>
-						<input type="submit" value="查詢">
+							<option th:each="res:${ResListData}"
+								th:text="${res.reserveOrderId}" th:value="${res.reserveOrderId}">
+						</select> <input type="submit" value="查詢">
 					</form>
-					</div>
+				</div>
+
+
+			<div style="display: inline-block;">
+								<form th:action="@{/reserve/total}" method="post">
+									<label></label> 
+									<input type="date" name="bookingDate">
+									<input type="submit" value="測試查詢">
+								</form>
+							</div>
 
 
 
 
-				
-
-
-<p>
+				<p>
 				<div style="display: inline-block;">
 					<form th:action="@{/reserve/get_many_query}" method="post">
 
-				
-<!-- 						<label>預定日期:</label> -->
-<!-- 						 <select name="bookingDate"> -->
-<!-- 							<option th:each="res:${ResListData}" -->
-<!-- 								th:text="*{#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"> -->
-<!-- 						</select> -->
+
+						<!-- 						<label>預定日期:</label> -->
+						<!-- 						 <select name="bookingDate"> -->
+						<!-- 							<option th:each="res:${ResListData}" -->
+						<!-- 								th:text="*{#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"> -->
+						<!-- 						</select> -->
 
 
-<label>訂單日期:</label>
-<input type="date" name="reserveOrderDate" onkeydown="return false"id="reserveOrderDate" />
+						<label>訂單日期:</label> 
+						<input type="date" name="reserveOrderDate"
+						onkeydown="return false" id="reserveOrderDate" />
+						<label>預定日期:</label>
+						<input type="date" name="bookingDate" onkeydown="return false"
+							id="bookingDate" />
+						<button type="button" onclick="clearDate()">清除</button>
+
+						<!-- 							<label>訂單日期:</label> -->
+						<!-- 						 <select name="reserveOrderDate"> -->
+						<!-- 							<option th:each="res:${ResListData}" -->
+						<!-- 								th:text="${res.reserveOrderDate}"> -->
+						<!-- 						</select> -->
+						<script>
+							function clearDate() {
+								document.getElementById("reserveOrderDate").value = "";
+								document.getElementById("bookingDate").value = "";
+							}
+						</script>
 
 
-<label>預定日期:</label>
-<input type="date" name="bookingDate" onkeydown="return false" id="bookingDate" />
 
-<button type="button" onclick="clearDate()">清除</button>
 
-<!-- 							<label>訂單日期:</label> -->
-<!-- 						 <select name="reserveOrderDate"> -->
-<!-- 							<option th:each="res:${ResListData}" -->
-<!-- 								th:text="${res.reserveOrderDate}"> -->
-<!-- 						</select> -->
-<script>
-function clearDate( ) {
-	 document.getElementById("reserveOrderDate").value = "";
-	    document.getElementById("bookingDate").value = "";
-	}
-</script>								
-								
-								
-								
-								
-								
-						 <input type="submit" value="查詢">
+
+						<input type="submit" value="查詢">
 					</form>
 				</div>
 
 
 
- 
-<!-- <div th:if="${res != null}">    單獨顯示查詢資料用--> 
-<!--    	 <p>員工編號: <span th:text="${resVO.reserveOrderId}"></span></p> -->
-<!--      <p>2: <span th:text="${resVO.memberVO.memId}"></span></p> -->
-<!--      <p>日期: <span th:text="${resVO.bookingDate}"></span></p> -->
-<!-- </div> -->
+
+				<!-- <div th:if="${res != null}">    單獨顯示查詢資料用-->
+				<!--    	 <p>員工編號: <span th:text="${resVO.reserveOrderId}"></span></p> -->
+				<!--      <p>2: <span th:text="${resVO.memberVO.memId}"></span></p> -->
+				<!--      <p>日期: <span th:text="${resVO.bookingDate}"></span></p> -->
+				<!-- </div> -->
 
 
-<p>
+				<p>
 
-<span th:utext="${message}" style="color: red;">${message</span>
+					<span th:utext="${message}" style="color: red;">${message</span>
 
 
 
-				<!-- 表格開始 -->
+					<!-- 表格開始 -->
 				<div align="center">
 
 
 
 
-							<!-- 頁碼用 隱藏 -->
-					<b><font color=red style="display: none;">
-					第<label id="currentPage">1</label>
-					/	<label id="pageNumber"></label>頁
+					<!-- 頁碼用 隱藏 -->
+					<b><font color=red style="display: none;"> 第<label
+							id="currentPage">1</label> / <label id="pageNumber"></label>頁
 					</font></b>
 
 
@@ -260,7 +269,7 @@ function clearDate( ) {
 								<th>會員編號</th>
 								<th>訂單日期</th>
 								<th>預定人數</th>
-								<th>預定日期</th>	
+								<th>預定日期</th>
 								<th style="width: 250px;">備註</th>
 								<th>訂單狀態</th>
 
@@ -270,7 +279,10 @@ function clearDate( ) {
 
 
 						<tbody>
-							<tr th:block th:each="res : ${ResList}">
+							<tr th:block th:each="res : ${ResList}" 
+							    th:class="${res.reserveOrderState == 0 ? 'cancel' : 
+							    			(res.reserveOrderState == 2 ? 'success' : '')}">
+
 
 								<td th:text=" ${res.reserveOrderId} "></td>
 								<td th:text=" ${res.ressionVO.reserveSessionId}"></td>
@@ -281,15 +293,18 @@ function clearDate( ) {
 									th:text="${#temporals.format(res.bookingDate, 'yyyy-MM-dd HH:mm')}"></td>
 								<td th:text=" ${res.orderNote}"></td>
 								<td
-									th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"></td>
+									th:text=" ${res.reserveOrderState == 0 ? '取消' : (res.reserveOrderState == 1 ? '成立' : '完成')}"
+									>
+									
+									</td>
 
 
 
 								<td>
 									<form method="post" th:action="@{/reserve/get_for_update}">
 										<input type="hidden" name="reserveOrderId"
-															th:value="${res.reserveOrderId}"> 
-												<input	type="submit" value="修改">
+											th:value="${res.reserveOrderId}"> <input
+											type="submit" value="修改" class="">
 									</form>
 								</td>
 							</tr>
@@ -303,8 +318,8 @@ function clearDate( ) {
 
 
 
-			
-							</div>
+
+			</div>
 		</div>
 	</div>
 	<th:block th:insert="~{/back-end/htmlfile/content2}" />
@@ -312,15 +327,6 @@ function clearDate( ) {
 
 
 	<script type="text/javascript">
-		// 		function makeEditable(rowIndex) {
-		// 			var row = document.getElementById('row' + rowIndex);
-		// 			var cells = row.getElementsByTagName('td');
-		// 			for (var i = 0; i < cells.length - 2; i++) { // -1 to exclude the action cell
-		// 				var value = cells[i].innerText;
-		// 				cells[i].innerHTML = '<input type="text"  value="' + value + '">';
-		// 			}
-		// 		}
-
 		$(function() { //--------------------分頁顯示
 			var $table = $("table ");
 			var currentPage = 0; //當前頁默認值為0  

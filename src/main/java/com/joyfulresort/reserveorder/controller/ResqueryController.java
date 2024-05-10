@@ -41,11 +41,24 @@ public class ResqueryController {
 	@Autowired
 	ResService resSvc;
 
+	@PostMapping("total")
+	public String total(
+			@RequestParam(value = "bookingDate") 
+			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
+			ModelMap model) {
+
+		Integer num = resSvc.countNumber(bookingDate);	
+		System.out.println(num);
+
+		return "back-end/reserve/reserveorder";
+	}
+
 	@PostMapping("get_query")
 	public String get_query(
-	@NotEmpty(message="搜尋請勿空白")
-	@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得大於4位數") 
-		@Pattern(regexp = "^$|\\d+", message = "只能是數字") @RequestParam(value = "reserveOrderId") String reserveOrderId,
+			@NotEmpty(message = "單筆搜尋欄位請勿空白") 
+			@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得超過4位數")
+//			@Pattern(regexp = "^$|\\d+", message = "只能是數字") 
+			@RequestParam(value = "reserveOrderId") String reserveOrderId,
 			ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
@@ -71,18 +84,19 @@ public class ResqueryController {
 			@RequestParam(value = "bookingDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
 			ModelMap model) {
 		List<ResVO> resVO = resSvc.findByDates(reserveOrderDate, bookingDate);
-
+		
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);
 		model.addAttribute("ResListData", list);
 		if (resVO.isEmpty()) {
 			model.addAttribute("message", "沒有符合的資料");
-
 //			return "back-end/reserve/reserveorder"; //無資料是否返回顯示所有
 		}
-		
+
 		model.addAttribute("ResList", resVO);
 
+		
+		
 		return "back-end/reserve/reserveorder";
 	}
 
@@ -91,7 +105,7 @@ public class ResqueryController {
 		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 		StringBuilder strBuilder = new StringBuilder();
 		for (ConstraintViolation<?> violation : violations) {
-			strBuilder.append(violation.getMessage() + "   ");
+			strBuilder.append(violation.getMessage() + "<br>");
 
 		}
 

@@ -1,12 +1,19 @@
 package com;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joyfulresort.member.model.MemberService;
@@ -44,7 +51,17 @@ public class IndexController_inSpringBoot {
 		return "front-end/restaurant/main";
 	}
 	
+	@GetMapping("/joyfulresort/reservefrontadd")//前端新增訂單
+	public String reservefrontadd(ModelMap model) {  
+		ResVO resVO = new ResVO();
+		model.addAttribute("resVO",resVO);
+		
+		return "front-end/restaurant/reserveorder";	
+	}
 
+
+	
+	
 	@GetMapping("/main_page")
 	public String indexWithParam(@RequestParam(name = "name", required = false, defaultValue = "") String name,
 			Model model) {
@@ -67,7 +84,22 @@ public class IndexController_inSpringBoot {
 		return "back-end/reserve/reservecontent";
 	}
 	
+	
 //	----------------------------------------------
+	@PostMapping("insertfront")
+	public String insertfront(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
+			throws IOException {
+		System.out.println("hunnnn");
+		if(result.hasErrors()) {
+			System.out.println("hun");
+		}
+		resSvc.addRes(resVO);
+		List<ResVO> list = resSvc.getAllRes();
+		model.addAttribute("ResList", list);
+		model.addAttribute("success", "新增成功");
+	
+		return "front-end/restaurant/main";
+	}
 	
 	
 	@ModelAttribute("MemberList")

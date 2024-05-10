@@ -193,9 +193,22 @@ tr:nth-child(even) {
 				    <input type="text" th:field="*{reserveNumber}" ><br><br>
 				
 				    <label for="" >預定日期:</label>
-				    <input  type="datetime-local" th:field="*{bookingDate}" id="bookingDate"><br><br>
-			
-			
+				    <input  type="datetime-local" th:field="*{bookingDate}" id="bookingDate" name="bookingDate"><br><br>
+					<div id="error"></div>
+					
+<script type="text/javascript">
+$('#bookingDate').change(function() {
+    var selectedDate = new Date($(this).val());
+    var selectedTime = selectedDate.getHours() * 100 + selectedDate.getMinutes(); // 將時間轉換為24小時制的數字表示，如1400表示14:00
+
+    // 假設限制為14:00前不能超過100人
+    if (selectedTime < 1400 && num > 100) {
+        $('#error').text('此時段已滿，請選擇其他時段');
+        $(this).val(''); // 清空日期時間欄位
+    } else {
+        $('#error').text('');
+    }
+});</script>			
 				
 				    <label for="">備註:</label>
 				    <textarea id="orderNote" th:field="*{orderNote}" maxlength="100" style="max-height: 150px;"></textarea><br><br>
@@ -214,7 +227,7 @@ tr:nth-child(even) {
 </body>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 			<script>
 				flatpickr(
 						"#bookingDate",
