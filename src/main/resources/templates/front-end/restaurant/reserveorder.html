@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>My Page</title>
 <link th:insert="~{/front-end/htmlfile/css.html}" />
- <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!--  <script th:src="@{/webjars/jquery/jquery.min.js}"></script> -->
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -26,12 +26,12 @@ h2 {
 }
 
 form {
-	padding-top:150px;
+	padding-top:10px;
 	display: flex;
 	flex-direction: column;
 	/*     align-items: center; /* 水平居中對齊 */
 	justify-content: center; /* 垂直居中對齊 */
-	width: 150px;
+	width: 250px;
 	margin: 0 auto; /* 左右居中 */
 }
 
@@ -66,6 +66,12 @@ button {
 button:hover {
 	background-color: #004494;
 }
+
+.flatpickr-calendar.inline {
+    position: absolute;
+  	 top: 70%;
+    left: 50%;
+}
 </style>
 
 
@@ -74,13 +80,15 @@ button:hover {
 <body class="main-layout">
 
 
-	<th:block link th:insert="~{/front-end/htmlfile/content3.html}" />
+	<th:block link th:insert="~{/front-end/htmlfile/content1.html}" />
 	<div th:fragment="content">
 		<div class="news-section">
-			<div class="container">
+			<div class="container"  style="display: flex;">
 				<!-- 東西從這裡放 -->
+				 
 
-				<form th:action="@{/insertfront}" method="post"
+				<div style="flex: 1; padding-left: 300px;">
+					<form th:action="@{/insertfront}" method="post"
 					th:object="${resVO}" enctype="multipary/form-data">
 
 					<!-- 				    <label for="">餐廳訂單編號:</label> -->
@@ -112,49 +120,65 @@ button:hover {
         });
     </script>    			   
      			   
-					 <label for="">預定日期:</label> 
+					 <label for="">預定日期:</label>
+					
       				 <input type="datetime-local" th:field="*{bookingDate}" id="bookingDate"  name="bookingDate" 
-      				 disabled style="width: 250px">
+      				 disabled style="width: 170px">
+					<div id="error" style="color: red;" > </div>
 					
 <script type="text/javascript">
 
 
 
 flatpickr("#bookingDate", {
-    enableTime: true,
-   
+    enableTime: true, 
     dateFormat: "Y-m-d H:i",
     time_24hr: true,
-    defaultDate : "10:00",
 	minTime : "10:00",
-	maxTime : "19:00",
+	maxTime : "20:00",
+// 	inline: true ,
 	minDate : new Date().fp_incr(3),
 	maxDate : new Date().fp_incr(60),
+	 minuteIncrement: 60,
+
+
+	});
+
+
+$('#bookingDate').change(function() {
+    var selectedDate = $(this).val();
+    var selectedNumber = $('#reserveNumber').val(); // 獲取選擇的人數值
+    checkAvailability(selectedDate,selectedNumber);
+ 
 });
 
-function checkAvailability(bookingDate) {
+$('#reserveNumber').change(function() {
+    var selectedDate = $('#bookingDate').val();
+    var selectedNumber = $(this).val();
+    checkAvailability(selectedDate, selectedNumber);
+});
+
+
+function checkAvailability(bookingDate,reserveNumber) {
     $.ajax({
         url: '/total',
         type: 'POST',
         data: { bookingDate: bookingDate },
         success: function(response) {
-            if (response.num >= 100 && response.time < 1400) {
-                $('#error').text('此時段已滿，請選擇其他時段');
+        	 // 將後端返回的總人數與前端所選擇的人數相加
+            var totalNumber = response + parseInt(reserveNumber);
+            // 檢查總人數是否超過 100
+            if (totalNumber > 100) {
+                // 超過則禁止選擇這個時間
+                $('#error').text('此時段預定已滿，請選擇其他時段').show();
                 $('#bookingDate').prop('disabled', true); // 禁用日期時間欄位
             } else {
-                $('#error').text('');
+                $('#error').hide();
                 $('#bookingDate').prop('disabled', false); // 啟用日期時間欄位
             }
         }
     });
 }
-
-$('#bookingDate').change(function() {
-    var selectedDate = $(this).val();
-    checkAvailability(selectedDate);
-});
-
-
 
 // 判斷有人數才能選擇時間 
 
@@ -168,6 +192,7 @@ $('#bookingDate').change(function() {
                 }
             });
         });
+        
 </script>
 
 					 <label for="">備註:</label>
@@ -184,18 +209,21 @@ $('#bookingDate').change(function() {
 						th:field="*{reserveOrderDate}">
 						<br><br>
 			
-				</form>
+					</form>
+				</div>
 
 
 
 
-
-
+					<div   style="flex: 1; padding-right: 100px;">
+						<div ><label ></label></div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	 
 
-	<th:block link th:insert="~{/front-end/htmlfile/content2.html}" />
+<!-- 	<th:block link th:insert="~{/front-end/htmlfile/content2.html}" /> -->
 	<th:block link th:insert="~{/front-end/htmlfile/script.html}" />
 </body>
 

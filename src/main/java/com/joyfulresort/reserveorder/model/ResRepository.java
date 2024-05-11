@@ -2,13 +2,12 @@ package com.joyfulresort.reserveorder.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ResRepository extends JpaRepository<ResVO, Integer> {
@@ -25,22 +24,30 @@ public interface ResRepository extends JpaRepository<ResVO, Integer> {
 	@Transactional
 	@Query(value = "SELECT * FROM reserve_order WHERE reserve_order_date LIKE %?1%", nativeQuery = true)
 	List<ResVO> findByReserveOrderDate(LocalDate reserveOrderDate);
-    
-	@Transactional
-    @Query(value = "SELECT * FROM reserve_order WHERE booking_date LIKE %?1%", nativeQuery = true)
-	List<ResVO> findByBookingDate(LocalDate bookingDate);	
-	
-	
-	@Transactional
-    @Query(value ="SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1% AND DATE_FORMAT(booking_date, '%H:%i:%s') < '14:00:00'",nativeQuery = true)
-    Integer countNumber101(LocalDate bookingDate);
-	
-	@Query(value ="SELECT SUM(reserve_number) FROM reserve_order WHERE booking_date LIKE %?1% AND (DATE_FORMAT(booking_date, '%H:%i:%s') > '14:00:00' and DATE_FORMAT(booking_date, '%H:%i:%s') < '22:00:00')", nativeQuery = true)
-	Integer countNumber102(LocalDate bookingDate);
 
+	@Transactional
+	@Query(value = "SELECT * FROM reserve_order WHERE booking_date LIKE %?1%", nativeQuery = true)
+	List<ResVO> findByBookingDate(LocalDate bookingDate);
+
+	@Transactional
+	@Query(value = "SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1% AND DATE_FORMAT(booking_date, '%H:%i:%s') < '14:00:00'", nativeQuery = true)
+	Integer countNumber101(LocalDate bookingDate);
+
+	@Transactional
+	@Query(value = "SELECT SUM(reserve_number) FROM reserve_order WHERE booking_date LIKE %?1% AND (DATE_FORMAT(booking_date, '%H:%i:%s') > '14:00:00' and DATE_FORMAT(booking_date, '%H:%i:%s') < '22:00:00')", nativeQuery = true)
+	Integer countNumber102(LocalDate bookingDate);
+	
+	
+
+//	@Query(value = "SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1% AND DATE_FORMAT(booking_date, '%H:%i:%s') < '14:00:00'", nativeQuery = true)
+//	Integer countNumber101(LocalDate bookingDate,Integer reserveNumber);
+//
+//	@Transactional
+//	@Query(value = "SELECT SUM(reserve_number) FROM reserve_order WHERE booking_date LIKE %?1% AND (DATE_FORMAT(booking_date, '%H:%i:%s') > '14:00:00' and DATE_FORMAT(booking_date, '%H:%i:%s') < '22:00:00')", nativeQuery = true)
+//	Integer countNumber102(LocalDate bookingDate,Integer reserveNumber);
+	
+	
+	
 //	List<ResVO> findByTimeBetween(Date TimeStart,Date TimeEnd);
-		
-	
-		
-	
+
 }

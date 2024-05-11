@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Joyfulresort 會員管理</title>
 <link th:insert="~{/back-end/htmlfile/css.html}" />
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
 <style type="text/css">
@@ -182,10 +184,10 @@ tr:nth-child(even) {
 				</div>
 
 
-			<div style="display: inline-block;">
+						<div style="display: inline-block;">
 								<form th:action="@{/total}" method="post">
 									<label></label> 
-									<input type="date" name="bookingDate">
+									<input type="datetime-local" name="bookingDate" id="test" style="width: 300PX">
 									<input type="submit" value="測試人數">
 								</form>
 							</div>
@@ -223,6 +225,25 @@ tr:nth-child(even) {
 								document.getElementById("reserveOrderDate").value = "";
 								document.getElementById("bookingDate").value = "";
 							}
+							
+							
+
+							flatpickr("#test", {
+							    enableTime: true,
+							   
+							    dateFormat: "Y-m-d H:i",
+							    time_24hr: true,
+							    defaultDate : "10:00",
+								minTime : "10:00",
+								maxTime : "20:00",
+								minDate : new Date().fp_incr(3),
+								maxDate : new Date().fp_incr(60),
+								 disable: [
+								        function(date) {
+								         
+								        }
+								    ]
+								});
 						</script>
 
 
@@ -327,6 +348,7 @@ tr:nth-child(even) {
 
 
 	<script type="text/javascript">
+	
 		$(function() { //--------------------分頁顯示
 			var $table = $("table ");
 			var currentPage = 0; //當前頁默認值為0  

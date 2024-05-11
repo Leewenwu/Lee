@@ -48,19 +48,20 @@ public class ResService {
 	public Integer countNumber101(LocalDate bookingDate) {
 		if (bookingDate != null) {
 
+//			System.out.println(bookingDate);
 			return repository.countNumber101(bookingDate);
-		} 
-		return null; 
+		}
+		return -2;
 
 	}
-	
+
 	public Integer countNumber102(LocalDate bookingDate) {
 		if (bookingDate != null) {
-
 			return repository.countNumber102(bookingDate);
-		} 
-		return null; 
 
+		} else {
+			return -2;
+		}
 	}
 
 //    ------------------------------------複合查詢

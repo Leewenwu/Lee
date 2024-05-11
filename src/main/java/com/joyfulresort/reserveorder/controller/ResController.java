@@ -51,20 +51,20 @@ public class ResController {
 		return "back-end/reserve/reserveadd";
 	}
 	
-	
-	@PostMapping("total")
-	@ResponseBody
-	public String total(
-			@RequestParam(value = "bookingDate") 
-			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
-			ModelMap model) {
-
-		Integer num = resSvc.countNumber(bookingDate);	
-		System.out.println(num);
-
-		return "back-end/reserve/reserveorder";
-	}
-	
+//	
+//	@PostMapping("total")
+//	@ResponseBody
+//	public String total(
+//			@RequestParam(value = "bookingDate") 
+//			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
+//			ModelMap model) {
+//
+//		Integer num = resSvc.countNumber(bookingDate);	
+//		System.out.println(num);
+//
+//		return "back-end/reserve/reserveorder";
+//	}
+//	
 
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {
