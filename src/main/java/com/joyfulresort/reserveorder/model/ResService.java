@@ -45,12 +45,21 @@ public class ResService {
 //		return totalNumber;
 //	}
 
-	public Integer countNumber(LocalDate bookingDate) {
+	public Integer countNumber101(LocalDate bookingDate) {
 		if (bookingDate != null) {
 
-			return repository.countNumber(bookingDate);
-		}
-		return -1; 
+			return repository.countNumber101(bookingDate);
+		} 
+		return null; 
+
+	}
+	
+	public Integer countNumber102(LocalDate bookingDate) {
+		if (bookingDate != null) {
+
+			return repository.countNumber102(bookingDate);
+		} 
+		return null; 
 
 	}
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.joyfulresort.member.model.MemberService;
@@ -29,7 +30,7 @@ import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
 
-@Validated
+
 @Controller
 @RequestMapping("/reserve")
 public class ResqueryController {
@@ -41,17 +42,7 @@ public class ResqueryController {
 	@Autowired
 	ResService resSvc;
 
-	@PostMapping("total")
-	public String total(
-			@RequestParam(value = "bookingDate") 
-			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
-			ModelMap model) {
-
-		Integer num = resSvc.countNumber(bookingDate);	
-		System.out.println(num);
-
-		return "back-end/reserve/reserveorder";
-	}
+	
 
 	@PostMapping("get_query")
 	public String get_query(

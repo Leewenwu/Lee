@@ -10,6 +10,7 @@ import javax.swing.plaf.multi.MultiFileChooserUI;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.reservecontent.model.ResContentVO;
@@ -48,6 +50,21 @@ public class ResController {
 
 		return "back-end/reserve/reserveadd";
 	}
+	
+	
+	@PostMapping("total")
+	@ResponseBody
+	public String total(
+			@RequestParam(value = "bookingDate") 
+			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
+			ModelMap model) {
+
+		Integer num = resSvc.countNumber(bookingDate);	
+		System.out.println(num);
+
+		return "back-end/reserve/reserveorder";
+	}
+	
 
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {

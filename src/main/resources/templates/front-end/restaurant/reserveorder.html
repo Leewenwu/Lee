@@ -44,7 +44,7 @@ input {
  	margin-bottom:20px; 
 	border: 1px solid #ddd;
 	border-radius: 5px;
-	width: 150px;
+	width: 80px;
 
 	
 }
@@ -94,16 +94,12 @@ button:hover {
 					 <label for="">會員編號:</label>
 					<input type="text" th:field="*{memberVO.memId}" >
 					
-					<label for="">訂單日期:</label> 
-					<input th:text="*{reserveOrderDate}" type="hidden"
-						th:field="*{reserveOrderDate}">
-						<br><br>
-					
-					
-					
+									
+		
 					
 					<label for="reserveNumber">預定人數:(最多20人)</label> 
      			   <input type="number" th:field="*{reserveNumber}" id="reserveNumber" name="reserveNumber" min="1" max="20">
+ 
      <script>
         document.getElementById('reserveNumber').addEventListener('input', function() {
             var reserveNumber = parseInt(this.value, 10);
@@ -118,9 +114,7 @@ button:hover {
      			   
 					 <label for="">預定日期:</label> 
       				 <input type="datetime-local" th:field="*{bookingDate}" id="bookingDate"  name="bookingDate" 
-      				 disabled
-      				 style="width: 250px">
-					 <label for="">備註:</label>
+      				 disabled style="width: 250px">
 					
 <script type="text/javascript">
 
@@ -138,11 +132,31 @@ flatpickr("#bookingDate", {
 	maxDate : new Date().fp_incr(60),
 });
 
+function checkAvailability(bookingDate) {
+    $.ajax({
+        url: '/total',
+        type: 'POST',
+        data: { bookingDate: bookingDate },
+        success: function(response) {
+            if (response.num >= 100 && response.time < 1400) {
+                $('#error').text('此時段已滿，請選擇其他時段');
+                $('#bookingDate').prop('disabled', true); // 禁用日期時間欄位
+            } else {
+                $('#error').text('');
+                $('#bookingDate').prop('disabled', false); // 啟用日期時間欄位
+            }
+        }
+    });
+}
+
+$('#bookingDate').change(function() {
+    var selectedDate = $(this).val();
+    checkAvailability(selectedDate);
+});
 
 
 
-
-// 判斷有人數才能選擇時間 原版時間
+// 判斷有人數才能選擇時間 
 
         $(document).ready(function () {
             $('#reserveNumber').on('input', function () {
@@ -156,18 +170,20 @@ flatpickr("#bookingDate", {
         });
 </script>
 
-
-
-
-
+					 <label for="">備註:</label>
 
 					<textarea id="orderNote" th:field="*{orderNote}" maxlength="100"	style="max-height: 150px;">	</textarea>
 					
-					
+					<br><button type="submit" id="submit">送出</button>
+						
+						
 					<!--  <label for="">訂單狀態:</label> -->
 					<input type="hidden" th:field="*{reserveOrderState}"><br><br>
-
-				<br><button type="submit" id="submit">送出</button>
+					<!-- <label for="">訂單日期:</label>  -->
+					<input  type="hidden"
+						th:field="*{reserveOrderDate}">
+						<br><br>
+			
 				</form>
 
 

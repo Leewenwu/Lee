@@ -32,10 +32,12 @@ public interface ResRepository extends JpaRepository<ResVO, Integer> {
 	
 	
 	@Transactional
-    @Query(value ="SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1%" ,nativeQuery = true)
-    Integer countNumber(LocalDate bookingDate);
+    @Query(value ="SELECT SUM(reserve_number) FROM reserve_order  WHERE booking_date like %?1% AND DATE_FORMAT(booking_date, '%H:%i:%s') < '14:00:00'",nativeQuery = true)
+    Integer countNumber101(LocalDate bookingDate);
 	
-	
+	@Query(value ="SELECT SUM(reserve_number) FROM reserve_order WHERE booking_date LIKE %?1% AND (DATE_FORMAT(booking_date, '%H:%i:%s') > '14:00:00' and DATE_FORMAT(booking_date, '%H:%i:%s') < '22:00:00')", nativeQuery = true)
+	Integer countNumber102(LocalDate bookingDate);
+
 //	List<ResVO> findByTimeBetween(Date TimeStart,Date TimeEnd);
 		
 	
