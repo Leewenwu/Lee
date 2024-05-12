@@ -89,9 +89,8 @@ public class IndexController_inSpringBoot {
 	@PostMapping("insertfront")
 	public String insertfront(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
 			throws IOException {
-		System.out.println("hunnnn");
 		if(result.hasErrors()) {
-			System.out.println("hun");
+			System.out.println("新增訂單錯誤");
 		}
 		resSvc.addRes(resVO);
 		List<ResVO> list = resSvc.getAllRes();

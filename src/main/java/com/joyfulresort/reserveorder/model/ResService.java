@@ -50,8 +50,9 @@ public class ResService {
 
 //			System.out.println(bookingDate);
 			return repository.countNumber101(bookingDate);
+		} else {
+			return -11;
 		}
-		return -2;
 
 	}
 
@@ -60,7 +61,7 @@ public class ResService {
 			return repository.countNumber102(bookingDate);
 
 		} else {
-			return -2;
+			return -11;
 		}
 	}
 
