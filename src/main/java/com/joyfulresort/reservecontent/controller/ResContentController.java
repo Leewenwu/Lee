@@ -26,14 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.joyfulresort.reservecontent.model.ResContentVO;
-import com.joyfulresort.reservecontent.model.RescontentService;
+import com.joyfulresort.reservecontent.model.ResContentService;
 
 @Controller
 @RequestMapping("/reserve")
 public class ResContentController {
 
 	@Autowired
-	RescontentService rescontentSvc;
+	ResContentService rescontentSvc;
 
 	@GetMapping("reservecontentadd")
 	public String reservecontentadd(ModelMap model) {

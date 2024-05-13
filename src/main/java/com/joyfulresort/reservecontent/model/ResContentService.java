@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("rescontentService")
-public class RescontentService {
+public class ResContentService {
 
     @Autowired
     private ResContentRepository repository;

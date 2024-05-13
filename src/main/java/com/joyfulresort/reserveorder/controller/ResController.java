@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.reservecontent.model.ResContentVO;
-import com.joyfulresort.reservecontent.model.RescontentService;
+import com.joyfulresort.reservecontent.model.ResContentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
@@ -41,7 +41,7 @@ public class ResController {
 	@Autowired
 	ResService resSvc;
 	@Autowired
-	RescontentService rescontentSvc;
+	ResContentService rescontentSvc;
 
 	@GetMapping("reservebackadd") // 後端新增訂單
 	public String reservebackadd(ModelMap model) {

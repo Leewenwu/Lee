@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.member.model.MemberVO;
 import com.joyfulresort.reservecontent.model.ResContentVO;
-import com.joyfulresort.reservecontent.model.RescontentService;
+import com.joyfulresort.reservecontent.model.ResContentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
@@ -34,7 +34,7 @@ public class IndexController_inSpringBoot {
 	@Autowired
 	ResService resSvc;
 	@Autowired
-	RescontentService rescontentSvc;
+	ResContentService rescontentSvc;
 
 	@GetMapping("/index")
 	public String index(Model model) {

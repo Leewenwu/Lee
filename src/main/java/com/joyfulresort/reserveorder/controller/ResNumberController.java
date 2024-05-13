@@ -18,7 +18,7 @@ import com.joyfulresort.reserveorder.model.ResService;
 
 @Controller
 @Validated
-public class ResNumber {
+public class ResNumberController {
 
 	@Autowired
 	ResService resSvc;
@@ -26,25 +26,26 @@ public class ResNumber {
 	@PostMapping("/total")
 	@ResponseBody
 	public Integer total(
-			@RequestParam(value = "bookingDate", required = false) 
-			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime bookingDate2,
-			@RequestParam(value = "bookingDate", required = false)
-			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDate bookingDate,
+			@RequestParam(value = "bookingDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime bookingDate2,
+			@RequestParam(value = "bookingDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDate bookingDate,
 			ModelMap model) {
+		if (bookingDate2 == null) {
+			bookingDate2 = LocalDateTime.now();
+		}
 		Integer num;
-//		Integer num = resSvc.countNumber101(bookingDate);
-		Integer hour = 0 ;
-		if (hour >14 && hour <21) {
-			hour =	bookingDate2.getHour();
+		Integer hour = 0;
+		hour = bookingDate2.getHour();
+		if (hour > 15 && hour < 22) {
+
 			num = resSvc.countNumber102(bookingDate);
-		}else {
+		} else {
 			num = resSvc.countNumber101(bookingDate);
 		}
-		
-		if (num == null ) {
-			 num = -1;
+
+		if (num == null) {
+			num = -1;
 		}
-//		System.out.println(num);
+
 		return num;
 
 	}

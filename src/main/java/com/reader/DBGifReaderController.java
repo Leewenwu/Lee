@@ -12,7 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import com.joyfulresort.member.model.MemberService;
-import com.joyfulresort.reservecontent.model.RescontentService;
+import com.joyfulresort.reservecontent.model.ResContentService;
 
 @Controller
 //@RequestMapping("/member")
@@ -23,7 +23,7 @@ public class DBGifReaderController {
 	MemberService memSvc;
 
 	@Autowired
-	RescontentService ContentSvc;
+	ResContentService ContentSvc;
 	
 	@GetMapping("DBGifReader")
 	public void dBGifReader(
