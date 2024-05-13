@@ -46,19 +46,8 @@ public class IndexController_inSpringBoot {
 		return "front-end/test";
 	}
 
-	@GetMapping("/joyfulresort/restaurant")
-	public String restaurant(Model model) {
-		return "front-end/restaurant/main";
-	}
 	
-	@GetMapping("/joyfulresort/reservefrontadd")//前端新增訂單
-	public String reservefrontadd(ModelMap model) {  
-		ResVO resVO = new ResVO();
-		model.addAttribute("resVO",resVO);
-		
-		return "front-end/restaurant/reserveorder";	
-	}
-
+	
 
 	
 	
@@ -86,19 +75,17 @@ public class IndexController_inSpringBoot {
 	
 	
 //	----------------------------------------------
-	@PostMapping("insertfront")
-	public String insertfront(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
-			throws IOException {
-		if(result.hasErrors()) {
-			System.out.println("新增訂單錯誤-93");
-		}
-		resSvc.addRes(resVO);
+	
+	
+	
+	@ModelAttribute("ContentList")
+	protected List<ResContentVO> referenceContentList(Model model) {
 
-		model.addAttribute("success", "新增成功");
-		return "front-end/restaurant/main";
-		
-//		return "redirect:/joyfulresort/restaurant";
+		List<ResContentVO> list = rescontentSvc.getAllContent();
+		return list;
 	}
+	
+	
 	
 	
 	
@@ -129,11 +116,6 @@ public class IndexController_inSpringBoot {
 		List<RessionVO> list = ressionSvc.getAllRessions();
 		return list;
 	}
-	@ModelAttribute("ContentList")
-	protected List<ResContentVO> referenceContentList(Model model) {
-
-		List<ResContentVO> list = rescontentSvc.getAllContent();
-		return list;
-	}
+	
 
 }

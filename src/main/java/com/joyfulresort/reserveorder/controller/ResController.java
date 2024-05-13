@@ -30,6 +30,7 @@ import com.joyfulresort.reservecontent.model.ResContentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
+
 @Validated
 @Controller
 @RequestMapping("/reserve")
@@ -51,9 +52,6 @@ public class ResController {
 
 		return "back-end/reserve/reserveadd";
 	}
-	
-
-
 
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {
@@ -83,8 +81,6 @@ public class ResController {
 		return "redirect:/reserve/reserveorder";
 	}
 
-
-	
 	@PostMapping("insert")
 	public String insert(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
 			throws IOException {
@@ -97,11 +93,9 @@ public class ResController {
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);
 		model.addAttribute("success", "新增成功!");
-		
+
 		return "back-end/reserve/reserveorder";
 	}
-	
-	
 
 	public BindingResult removeFieldError(ResVO resVO, BindingResult result, String removedFieldname) {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()
