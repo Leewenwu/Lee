@@ -97,6 +97,7 @@ button {
 </head>
 
 <body class="main-layout">
+
 	<!-- th:style="'; background-image: url('+@{/frontend/images/restaurant.jpg}+');'" -->
 	<th:block link th:insert="~{/front-end/htmlfile/content3.html}" />
 	<div th:fragment="content">
@@ -119,7 +120,8 @@ button {
 							
 							
 						<select th:field="*{reserveNumber}" id="reserveNumber" name="reserveNumber"
-						style="width: 50px">
+						style="width: 100px">
+							<option value="">選擇人數</option>
 						    <option value="1">1</option>
 						    <option value="2">2</option>
 						    <option value="3">3</option>
@@ -146,8 +148,8 @@ button {
 
 						<label for="">備註:</label>
 
-						<textarea id="orderNote" th:field="*{orderNote}" maxlength="100"
-							style="max-height: 150px; height: 70px" placeholder="最多50字......">	</textarea>
+						<textarea id="orderNote" th:field="*{orderNote}" maxlength="50"
+							style="max-height: 150px; height: 70px" placeholder="最多25字......">	</textarea>
 
 						<br>
 						<button type="submit" id="submit">送出</button>

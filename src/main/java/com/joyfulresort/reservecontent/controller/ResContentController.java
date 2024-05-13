@@ -118,7 +118,7 @@ public class ResContentController {
 		List<ResContentVO> list = rescontentSvc.getAllContent();
 		model.addAttribute("ContentList", list);
 
-		model.addAttribute("success", "刪除	成功");
+		model.addAttribute("success", "刪除成功");
 
 		return "redirect:/reserve/reservecontent";
 

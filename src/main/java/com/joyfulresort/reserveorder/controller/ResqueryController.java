@@ -29,8 +29,7 @@ import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
-
-
+@Validated
 @Controller
 @RequestMapping("/reserve")
 public class ResqueryController {
@@ -42,28 +41,24 @@ public class ResqueryController {
 	@Autowired
 	ResService resSvc;
 
-	
-
 	@PostMapping("get_query")
 	public String get_query(
-			@NotEmpty(message = "單筆搜尋欄位請勿空白") 
-			@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得超過4位數")
-//			@Pattern(regexp = "^$|\\d+", message = "只能是數字") 
-			@RequestParam(value = "reserveOrderId") String reserveOrderId,
-			ModelMap model) {
+@NotEmpty(message = "單筆搜尋欄位請勿空白")
+@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得超過4位數")
+//@Pattern(regexp = "^$|\\d+", message = "只能是數字") 
+@RequestParam(value = "reserveOrderId") String reserveOrderId, ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
 
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);// 為配合顯示所有的表格
 		model.addAttribute("ResListData", list);// 用來顯示下拉選單
-
-		if (resVO == null) {
-			model.addAttribute("message", "沒有符合的資料");
-//			return "back-end/reserve/reserveorder"; //無資料是否返回顯示所有
-		}
-
 		model.addAttribute("ResList", resVO);
+
+		if (resVO == null) {	
+			model.addAttribute("message", "沒有符合的資料");
+//			return "back-end/reserve/reserveorder"; // 無資料是否返回顯示所有
+		}
 
 		return "back-end/reserve/reserveorder";
 	}
@@ -75,7 +70,7 @@ public class ResqueryController {
 			@RequestParam(value = "bookingDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
 			ModelMap model) {
 		List<ResVO> resVO = resSvc.findByDates(reserveOrderDate, bookingDate);
-		
+
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);
 		model.addAttribute("ResListData", list);
@@ -86,8 +81,6 @@ public class ResqueryController {
 
 		model.addAttribute("ResList", resVO);
 
-		
-		
 		return "back-end/reserve/reserveorder";
 	}
 

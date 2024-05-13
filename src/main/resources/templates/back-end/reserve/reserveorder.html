@@ -188,7 +188,7 @@ tr:nth-child(even) {
 								<form th:action="@{/total}" method="post">
 									<label></label> 
 									<input type="datetime-local" name="bookingDate" id="test" 
-									style="width: 300PX">
+									style="width: 100PX">
 									<input type="submit" value="測試人數">
 								</form>
 							</div>
@@ -268,7 +268,8 @@ tr:nth-child(even) {
 				<p>
 
 					<span th:utext="${message}" style="color: red;">${message</span>
-
+					<span th:text="${success}" style="color:blue;"></span>
+					
 
 
 					<!-- 表格開始 -->

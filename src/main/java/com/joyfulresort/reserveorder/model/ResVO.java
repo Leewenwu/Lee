@@ -55,7 +55,7 @@ public class ResVO implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime bookingDate;
 
-	@Column(name = "order_note", length = 50)
+	@Column(name = "order_note", length = 60)
 	private String orderNote;
 
 	@ManyToOne(fetch = FetchType.EAGER)

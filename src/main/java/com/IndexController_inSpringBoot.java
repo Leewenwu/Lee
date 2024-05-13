@@ -90,15 +90,16 @@ public class IndexController_inSpringBoot {
 	public String insertfront(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
 			throws IOException {
 		if(result.hasErrors()) {
-			System.out.println("新增訂單錯誤");
+			System.out.println("新增訂單錯誤-93");
 		}
 		resSvc.addRes(resVO);
-		List<ResVO> list = resSvc.getAllRes();
-		model.addAttribute("ResList", list);
+
 		model.addAttribute("success", "新增成功");
-	
 		return "front-end/restaurant/main";
+		
+//		return "redirect:/joyfulresort/restaurant";
 	}
+	
 	
 	
 	@ModelAttribute("MemberList")

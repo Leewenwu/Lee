@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ import com.joyfulresort.reservecontent.model.ResContentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
-
+@Validated
 @Controller
 @RequestMapping("/reserve")
 public class ResController {
@@ -51,20 +52,8 @@ public class ResController {
 		return "back-end/reserve/reserveadd";
 	}
 	
-//	
-//	@PostMapping("total")
-//	@ResponseBody
-//	public String total(
-//			@RequestParam(value = "bookingDate") 
-//			@DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate,
-//			ModelMap model) {
-//
-//		Integer num = resSvc.countNumber(bookingDate);	
-//		System.out.println(num);
-//
-//		return "back-end/reserve/reserveorder";
-//	}
-//	
+
+
 
 	@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {
@@ -107,8 +96,9 @@ public class ResController {
 
 		List<ResVO> list = resSvc.getAllRes();
 		model.addAttribute("ResList", list);
-		model.addAttribute("success", "新增成功");
-		return "redirect:/reserve/reserveorder";
+		model.addAttribute("success", "新增成功!");
+		
+		return "back-end/reserve/reserveorder";
 	}
 	
 	
