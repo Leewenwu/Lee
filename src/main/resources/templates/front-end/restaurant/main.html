@@ -92,12 +92,20 @@
 
 		<div class="container" style="padding-top: 40px;">
 
+			<span th:text="${success}" style="color: blue;"></span>
 
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var successMessage = /*[[${success}]]*/ '';
+    if (successMessage) {
+        alert(successMessage);
+    }
+    /*]]>*/
+</script>
 
 			<h2 class="text-center p-0 lora-type m-0" style="color: #847674;"
 				data-aos="fade-up" data-aos-duration="1000">概覽</h2>
-				
+
 			<P class="text-center h5 mb-5 fw-bold" data-aos="fade-up"
 				data-aos-duration="2000"></P>
 			<div class="row">
@@ -132,18 +140,12 @@
 							<!-- 這個div是空的，用來創造間隔 -->
 
 
-
-
-
-
-
-						<form th:action="@{/joyfulresort/reservefrontadd}" >
-							<button   class="hover-button">我要訂位</button>
+							<form th:action="@{/joyfulresort/reservefrontadd}">
+								<button class="hover-button">我要訂位</button>
 							</form>
 						</div>
 					</div>
 				</div>
-
 
 
 
@@ -172,8 +174,7 @@
 						<h3></h3>
 						<p>午 餐：成人TWD600 / 兒童TWD300</p>
 						<p>
-							晚 餐：週一至週四 成人TWD700 / 兒童TWD350<br> 週五至週日 成人TWD800 /
-							兒童TWD400
+							晚 餐：週一至週四 成人TWD700 / 兒童TWD350<br> 週五至週日 成人TWD800 / 兒童TWD400
 						</p>
 						<p>以上價格需另加一成服務費，以現場公告為主，不另行通知。</p>
 						<p>兒童收費標準：0-5歲免費，6-12歲以兒童價收費，13歲(含)以上以成人計價。</p>

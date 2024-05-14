@@ -15,16 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.joyfulresort.member.model.MemberService;
-import com.joyfulresort.member.model.MemberVO;
 import com.joyfulresort.reservecontent.model.ResContentVO;
 import com.joyfulresort.reservecontent.model.ResContentService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
-import com.joyfulresort.reservesession.model.RessionService;
-import com.joyfulresort.reservesession.model.RessionVO;
 
 @Controller
 @RequestMapping("/joyfulresort")
@@ -35,7 +29,7 @@ public class IndexController_Front_Res {
 	@Autowired
 	ResContentService rescontentSvc;
 
-	@GetMapping("/restaurant")
+	@GetMapping("restaurant")
 	public String restaurant(Model model) {
 		return "front-end/restaurant/main";
 	}
@@ -57,8 +51,14 @@ public class IndexController_Front_Res {
 		resSvc.addRes(resVO);
 		model.addAttribute("success", "新增成功");
 	
-		return "redirect:/joyfulresort/restaurant";
-//		return "front-end/restaurant/main"; 會多報Request method 'GET' not supported] 無解 但功能正常
+//		return "redirect:/joyfulresort/restaurant"  
+		//也沒問題
+//		return "back-end/reserve/reserveorder"; 
+		//沒問題
+		return "front-end/restaurant/main"; 
+//		會多報Request method 'GET' not supported]   
+//		在Index控制層76行多設置一個getmapping才不會抱錯
+		
 	}
 
 	@ModelAttribute("ContentList")

@@ -53,7 +53,24 @@ public class ResController {
 		return "back-end/reserve/reserveadd";
 	}
 
-	@PostMapping("get_for_update")
+	
+	
+	@PostMapping("insert")
+	public String insert(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
+			throws IOException {
+		
+//	if(result.hasErrors()) {
+//		return"back-end/404";
+//	}
+		resSvc.addRes(resVO);
+		
+		List<ResVO> list = resSvc.getAllRes();
+		model.addAttribute("ResList", list);
+		model.addAttribute("success", "新增成功!");
+		
+		return "back-end/reserve/reserveorder";
+	}
+@PostMapping("get_for_update")
 	public String get_for_update(@RequestParam("reserveOrderId") String reserveOrderId, ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
@@ -81,21 +98,6 @@ public class ResController {
 		return "redirect:/reserve/reserveorder";
 	}
 
-	@PostMapping("insert")
-	public String insert(@Valid ResVO resVO, BindingResult result, HttpServletRequest request, ModelMap model)
-			throws IOException {
-
-//		if(result.hasErrors()) {
-//			return"back-end/404";
-//		}
-		resSvc.addRes(resVO);
-
-		List<ResVO> list = resSvc.getAllRes();
-		model.addAttribute("ResList", list);
-		model.addAttribute("success", "新增成功!");
-
-		return "back-end/reserve/reserveorder";
-	}
 
 	public BindingResult removeFieldError(ResVO resVO, BindingResult result, String removedFieldname) {
 		List<FieldError> errorsListToKeep = result.getFieldErrors().stream()

@@ -46,11 +46,16 @@ public class IndexController_inSpringBoot {
 		return "front-end/test";
 	}
 
-	
-	
+	@GetMapping("/front")
+	public String frontindex(Model model) {
+		return "front-end/index";
+	}
 
-	
-	
+	@GetMapping("/memberinfo")
+	public String memberinfo(Model model) {
+		return "front-end/memberinfo";
+	}
+
 	@GetMapping("/main_page")
 	public String indexWithParam(@RequestParam(name = "name", required = false, defaultValue = "") String name,
 			Model model) {
@@ -62,33 +67,31 @@ public class IndexController_inSpringBoot {
 	public String member(Model model) {
 		return "back-end/member/member";
 	}
- 
+
+	
 	@GetMapping("/reserve/reserveorder")
 	public String listAllres(Model model) {
 		return "back-end/reserve/reserveorder";
+	}
+	@GetMapping("/joyfulresort/insertfront")  //配合前端新增訂單控制層而設置
+	public String restaurant1(Model model) {
+		return "front-end/restaurant/main";
 	}
 
 	@GetMapping("/reserve/reservecontent")
 	public String reservecontent(Model model) {
 		return "back-end/reserve/reservecontent";
 	}
-	
-	
+
 //	----------------------------------------------
-	
-	
-	
+
 	@ModelAttribute("ContentList")
 	protected List<ResContentVO> referenceContentList(Model model) {
 
 		List<ResContentVO> list = rescontentSvc.getAllContent();
 		return list;
 	}
-	
-	
-	
-	
-	
+
 	@ModelAttribute("MemberList")
 	protected List<MemberVO> referenceMemberList(Model model) {
 
@@ -116,6 +119,5 @@ public class IndexController_inSpringBoot {
 		List<RessionVO> list = ressionSvc.getAllRessions();
 		return list;
 	}
-	
 
 }
