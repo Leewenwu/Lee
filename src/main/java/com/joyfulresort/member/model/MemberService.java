@@ -33,7 +33,7 @@ public class MemberService {
 
 	}
 
-	public List<MemberVO> getAll() {
+	public List<MemberVO> getAllmember() {
 		return repository.findAll();
 	}
 	

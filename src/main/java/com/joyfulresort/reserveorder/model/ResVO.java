@@ -1,7 +1,8 @@
 package com.joyfulresort.reserveorder.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,57 +12,61 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.joyfulresort.member.model.MemberVO;
 import com.joyfulresort.reservesession.model.RessionVO;
 
 @Entity
-@DynamicUpdate
+
 @Table(name = "reserve_order")
 public class ResVO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotEmpty(message="ID請勿空白")
 	@Column(name = "reserve_order_id")
 	private Integer reserveOrderId;
 
-	@NotEmpty(message="請勿空白")
+	@NotNull(message = "日期請勿空白")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "reserve_order_date")
-	@Temporal(TemporalType.DATE)
-	private Date reserveOrderDate;
+	private LocalDate reserveOrderDate =LocalDate.now() ;
+	
 
-	@NotEmpty(message="人數請勿空白")
+	
+	
+	@NotNull(message = "人數請勿空白")
 	@Column(name = "reserve_number")
 	private Integer reserveNumber;
 
 	
+	@NotNull
 	@Column(name = "reserve_order_state")
 	private Byte reserveOrderState = 1;
-	
-	@NotEmpty(message="預定日期請勿空白")
-	@Column(name = "booking_date")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date bookingDate;
 
-	@Column(name = "order_note", length = 50)
+	@NotNull(message = "預定日期請勿空白")
+	@Column(name = "booking_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime bookingDate;
+
+	@Column(name = "order_note", length = 60)
 	private String orderNote;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
+	@JoinColumn(name = "member_id")
 	private MemberVO memberVO;
 
-
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "reserve_session_id", referencedColumnName = "reserve_session_id")
+	@JoinColumn(name = "reserve_session_id")
 	private RessionVO ressionVO;
-
+	
+	
 	public Integer getReserveOrderId() {
 		return reserveOrderId;
 	}
@@ -70,11 +75,11 @@ public class ResVO implements Serializable {
 		this.reserveOrderId = reserveOrderId;
 	}
 
-	public Date getReserveOrderDate() {
+	public LocalDate getReserveOrderDate() {
 		return reserveOrderDate;
 	}
-
-	public void setReserveOrderDate(Date reserveOrderDate) {
+		
+	public void setReserveOrderDate(LocalDate reserveOrderDate) {
 		this.reserveOrderDate = reserveOrderDate;
 	}
 
@@ -94,11 +99,11 @@ public class ResVO implements Serializable {
 		this.reserveOrderState = reserveOrderState;
 	}
 
-	public Date getBookingDate() {
+	public LocalDateTime getBookingDate() {
 		return bookingDate;
 	}
 
-	public void setBookingDate(Date bookingDate) {
+	public void setBookingDate(LocalDateTime bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 
@@ -128,7 +133,14 @@ public class ResVO implements Serializable {
 
 	public ResVO() {
 		super();
-		
+
+	}
+
+	@Override
+	public String toString() {
+		return "ResVO [reserveOrderId=" + reserveOrderId + ", reserveOrderDate=" + reserveOrderDate + ", reserveNumber="
+				+ reserveNumber + ", reserveOrderState=" + reserveOrderState + ", bookingDate=" + bookingDate
+				+ ", orderNote=" + orderNote + ", memberVO=" + memberVO + ", ressionVO=" + ressionVO + "]";
 	}
 
 }
