@@ -35,7 +35,7 @@ public class IndexController_inSpringBoot {
 	ResService resSvc;
 	@Autowired
 	ResContentService rescontentSvc;
-
+//XDDxxx
 	@GetMapping("/index")
 	public String index(Model model) {
 		return "index";
