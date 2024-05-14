@@ -10,7 +10,11 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+	crossorigin="anonymous">
 
 
 <style>
@@ -82,8 +86,8 @@ button {
 }
 
 .time-button {
-	margin: 5px 10px;
-	padding: 5px;
+	margin: 10px 10px;
+	padding: 8px;
 	font-size: 20px;
 	margin-left: 0;
 	cursor: pointer;
@@ -92,6 +96,10 @@ button {
 	color: #272727;
 }
 
+.time-button:focus {
+	background-color: #007BFF; /* 點擊時的背景顏色 */
+	color: white; /* 點擊時的文字顏色 */
+}
 </style>
 
 </head>
@@ -104,6 +112,19 @@ button {
 		<div class="news-section" style="margin-top: 100px;">
 			<div class="container" style="display: flex;">
 				<!-- 東西從這裡放 -->
+		<div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+		    <strong>新增成功！</strong> 訂單已成功新增。
+		    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+
+
+
+
+
+
+
+
 
 
 				<div style="flex: 1; padding-left: 200px;">
@@ -115,32 +136,27 @@ button {
 						<label for="" style="display: none;">餐廳場次編號:</label> <input
 							type="hidden" id="sessionid"
 							th:field="*{ressionVO.reserveSessionId}"> <label for="">會員編號:</label>
-						<input type="text" th:field="*{memberVO.memId}"> <label
-							for="reserveNumber">預定人數:(最多10人)</label> 
-							
-							
-						<select th:field="*{reserveNumber}" id="reserveNumber" name="reserveNumber"
-						style="width: 100px">
+						<input type="text" th:field="*{memberVO.memId}" required>
+						<label for="reserveNumber">預定人數:(最多10人)</label> <select
+							th:field="*{reserveNumber}" id="reserveNumber"
+							name="reserveNumber" style="width: 100px; height: 25px;">
 							<option value="">選擇人數</option>
-						    <option value="1">1</option>
-						    <option value="2">2</option>
-						    <option value="3">3</option>
-						    <option value="4">4</option>
-						    <option value="5">5</option>
-						    <option value="6">6</option>
-						    <option value="7">7</option>
-						    <option value="8">8</option>
-						    <option value="9">9</option>
-						    <option value="10">10</option>
-						</select>
-							
-							
-							<label for="">預定日期:</label>
-						<input type="datetime-local" id="bookingDate" name="bookingDate"
-							th:field="*{bookingDate}" disabled style="width: 170px">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select> <label for="">預定日期:</label> <input type="datetime-local"
+							id="bookingDate" name="bookingDate" th:field="*{bookingDate}"
+							disabled style="width: 150px" required>
 
 
-				
+
 
 
 						<!-- 						<div id="time-buttons"></div> -->
@@ -172,21 +188,23 @@ button {
 
 					<div>
 						<label>時間:</label>
-						
+
 						<div style="position: relative;">
 							<div id="time-buttons" style="width: 350px"></div>
-							<div id="error" style="color: red; position: absolute; font-size: 18px "   ></div>
+							<div id="error"
+								style="color: red; position: absolute; font-size: 18px"></div>
 						</div>
-						
+
 						<br>
 						<div style="overflow: auto; width: 150%;">
 							<label style="padding-top: 20px">說明:</label>
-							<ul  style="padding-left: 0px">
-								
+							<ul style="padding-left: 0px">
+
 								<li>* 超過 10 人的訂位，請使用電話預約</li>
 								<li>* 以上價格需另加一成服務費，以現場公告為主，不另行通知。</li>
 								<li>* 兒童收費標準：0-5歲免費，6-12歲以兒童價收費，13歲(含)以上以成人計價。</li>
-								<li>* 此餐價恕不適用於國定假日、農曆除夕、農曆春節、中西情人節、母親節(前一週週末與當週週末)、父親節、耶誕夜、耶誕節、跨年夜及特殊美食節。</li>
+								<li>*
+									此餐價恕不適用於國定假日、農曆除夕、農曆春節、中西情人節、母親節(前一週週末與當週週末)、父親節、耶誕夜、耶誕節、跨年夜及特殊美食節。</li>
 
 							</ul>
 
@@ -205,25 +223,26 @@ button {
 
 <script type="text/javascript">
 	// 時間按鈕的時間列表
-var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:00'];
+	var times = [ '11:00', '12:00', '13:00', '14:00', '17:00', '18:00',
+			'19:00', '20:00' ];
 
-// 	var times = [];
-// 	for (var i = 11; i <= 14; i++) {
-// 	    var time = i.	toString().padStart(2, '0') + ':00';
-// 	    times.push(time);
-	    
-// 	}
+	// 	var times = [];
+	// 	for (var i = 11; i <= 14; i++) {
+	// 	    var time = i.	toString().padStart(2, '0') + ':00';
+	// 	    times.push(time);
 
-// 	for (var i = 17; i <= 20; i++) {
-// 	    var time = i.toString().padStart(2, '0') + ':00';
-// 	    times.push(time);
-// 	}
-// 	for (var i = 11; i <= 20; i++) {
-// 	    if (i !== 15 && i !== 16) {
-// 		var time = i.toString().padStart(2, '0') + ':00';
-// 		times.push(time);
-// 	}
-// 	}
+	// 	}
+
+	// 	for (var i = 17; i <= 20; i++) {
+	// 	    var time = i.toString().padStart(2, '0') + ':00';
+	// 	    times.push(time);
+	// 	}
+	// 	for (var i = 11; i <= 20; i++) {
+	// 	    if (i !== 15 && i !== 16) {
+	// 		var time = i.toString().padStart(2, '0') + ':00';
+	// 		times.push(time);
+	// 	}
+	// 	}
 	//獲取用於放置按鈕的元素
 	var timeButtonsContainer = document.getElementById('time-buttons');
 
@@ -235,7 +254,6 @@ var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:
 
 		bookingDateInput.value = selectedDateTime;
 		var selectedNumber = $('#reserveNumber').val(); // 獲取選擇的人數
-		console.log(selectedDateTime)
 
 		checkAvailability(selectedDateTime, selectedNumber);
 	}
@@ -268,9 +286,9 @@ var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:
 		// 	inline: true ,
 		minDate : new Date().fp_incr(3),
 		maxDate : new Date().fp_incr(60),
-		
+
 		minuteIncrement : 60,
-		
+
 		onClose : function(selectedDates) {
 			const hour = selectedDates[0].getHours();
 			const sessionidValue = hour < 15 ? "101" : "102";
@@ -278,8 +296,7 @@ var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:
 			document.getElementById("sessionid").value = sessionidValue;
 
 		},
-			
-    
+
 	});
 	//-------------------------------------------------日期樣式
 	$('#bookingDate').change(function() {
@@ -309,7 +326,7 @@ var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:
 				// 檢查總人數是否超過 100
 				if (totalNumber > 100) {
 					// 超過則禁止選擇這個時間
-					$('#error').text(''+response.message+'').show();
+					$('#error').text('' + response.message + '').show();
 					$('#submit').prop('disabled', true); // 禁用送出欄位
 				} else {
 					$('#error').hide();
@@ -355,9 +372,10 @@ var times = ['11:00', '12:00', '13:00', '14:00', '17:00', '18:00', '19:00', '20:
 									: '1'; // 根據按鈕狀態設置透明度
 						});
 			});
-	
-	
 </script>
 
-
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+	crossorigin="anonymous"></script>
 </html>

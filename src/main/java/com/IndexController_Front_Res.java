@@ -50,16 +50,14 @@ public class IndexController_Front_Res {
 		}
 		resSvc.addRes(resVO);
 		model.addAttribute("success", "新增成功");
-	
+		return "front-end/restaurant/main";
+	}
 //		return "redirect:/joyfulresort/restaurant"  
-		//也沒問題
+	// 也沒問題
 //		return "back-end/reserve/reserveorder"; 
-		//沒問題
-		return "front-end/restaurant/main"; 
+	// 沒問題
 //		會多報Request method 'GET' not supported]   
 //		在Index控制層76行多設置一個getmapping才不會抱錯
-		
-	}
 
 	@ModelAttribute("ContentList")
 	protected List<ResContentVO> referenceContentList(Model model) {
