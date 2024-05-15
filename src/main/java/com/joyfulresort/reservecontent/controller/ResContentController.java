@@ -25,11 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.joyfulresort.reservecontent.model.ResContentVO;
 import com.joyfulresort.reservecontent.model.ResContentService;
+import com.joyfulresort.reservecontent.model.ResContentVO;
 
 @Controller
 @RequestMapping("/reserve")
+
 public class ResContentController {
 
 	@Autowired
@@ -46,8 +47,7 @@ public class ResContentController {
 	public String get_for_contentupdate(@RequestParam("id") String id, ModelMap model) {
 
 		ResContentVO contentVO = rescontentSvc.getOneContent(Integer.valueOf(id));
-		List<ResContentVO> list = rescontentSvc.getAllContent();
-		model.addAttribute("ContentList", list);
+
 		model.addAttribute("contentVO", contentVO);
 
 		return "back-end/reserve/reservecontentupdate";
@@ -56,7 +56,10 @@ public class ResContentController {
 	@PostMapping("contentupdate")
 	public String contentupdate(@Valid ResContentVO contentVO, BindingResult result, ModelMap model,
 			@RequestParam("reserveImage") MultipartFile[] parts) throws IOException {
+
+		model.addAttribute("contentVO", contentVO);
 		result = removeFieldError(contentVO, result, "reserveImage");
+
 
 		if (parts[0].isEmpty()) {
 			byte[] reserveImage = rescontentSvc.getOneContent(contentVO.getId()).getReserveImage();
@@ -69,13 +72,16 @@ public class ResContentController {
 
 		}
 		if (result.hasErrors()) {
-			model.addAttribute("message", "錯誤!"); // 待修正
+//			  model.addAttribute("error", result.getAllErrors());
+			  model.addAttribute("error", result.getFieldError("reserveText"));
+			return "back-end/reserve/reservecontentupdate";
+
 		}
+		
 
 		rescontentSvc.updateContent(contentVO);
 		List<ResContentVO> contentList = rescontentSvc.getAllContent();
 		model.addAttribute("ContentList", contentList);
-		contentVO = rescontentSvc.getOneContent(Integer.valueOf(contentVO.getId()));
 
 		return "back-end/reserve/reservecontent";
 
@@ -85,9 +91,10 @@ public class ResContentController {
 	public String contentinsert(@Valid ResContentVO contentVO, BindingResult result, ModelMap model,
 			@RequestParam("reserveImage") MultipartFile[] parts) throws IOException {
 		result = removeFieldError(contentVO, result, "reserveImage");
+		model.addAttribute("contentVO", contentVO);
 
 		if (parts[0].isEmpty()) {
-			model.addAttribute("errorMessage", "請上傳內容照片");
+			model.addAttribute("message", "請上傳內容照片");
 
 		} else {
 			for (MultipartFile multipartFile : parts) {
@@ -97,8 +104,10 @@ public class ResContentController {
 
 		}
 		if (result.hasErrors() || parts[0].isEmpty()) {
-//			return "back-end/reserve/reservecontentadd";
-			// 待修正 無法導回
+			  model.addAttribute("error", result.getFieldError("reserveText"));
+
+			return "back-end/reserve/reservecontentadd";
+
 		}
 
 		rescontentSvc.addContent(contentVO);
@@ -144,10 +153,10 @@ public class ResContentController {
 
 		}
 
-		List<ResContentVO> list = rescontentSvc.getAllContent();
-		model.addAttribute("ContentList", list);
-//		model.addAttribute("ResList", list);// 錯誤時顯示所有清單
+//		List<ResContentVO> list = rescontentSvc.getAllContent();
+//		model.addAttribute("ContentList", list);
 		String message = strBuilder.toString();
+		System.out.println(message);
 		return new ModelAndView("/back-end/reserve/reservecontentupdate", "message", message);
 
 	}

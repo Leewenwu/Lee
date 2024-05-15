@@ -29,6 +29,7 @@ import com.joyfulresort.member.model.MemberService;
 import com.joyfulresort.reserveorder.model.ResService;
 import com.joyfulresort.reserveorder.model.ResVO;
 import com.joyfulresort.reservesession.model.RessionService;
+
 @Validated
 @Controller
 @RequestMapping("/reserve")
@@ -43,10 +44,9 @@ public class ResqueryController {
 
 	@PostMapping("get_query")
 	public String get_query(
-@NotEmpty(message = "單筆搜尋欄位請勿空白")
-@Digits(integer = 4, fraction = 0, message = "只能是數字,且不得超過4位數")
-//@Pattern(regexp = "^$|\\d+", message = "只能是數字") 
-@RequestParam(value = "reserveOrderId") String reserveOrderId, ModelMap model) {
+			@NotEmpty(message = "單筆搜尋欄位請勿空白") @Digits(integer = 4, fraction = 0, message = "只能是數字,且不得超過4位數")
+			//@Pattern(regexp = "^$|\\d+", message = "只能是數字") 
+			@RequestParam(value = "reserveOrderId") String reserveOrderId, ModelMap model) {
 
 		ResVO resVO = resSvc.getOneRes(Integer.valueOf(reserveOrderId));
 
@@ -55,7 +55,7 @@ public class ResqueryController {
 		model.addAttribute("ResListData", list);// 用來顯示下拉選單
 		model.addAttribute("ResList", resVO);
 
-		if (resVO == null) {	
+		if (resVO == null) {
 			model.addAttribute("message", "沒有符合的資料");
 //			return "back-end/reserve/reserveorder"; // 無資料是否返回顯示所有
 		}
@@ -98,7 +98,7 @@ public class ResqueryController {
 //		model.addAttribute("ResList", list);// 錯誤時顯示所有清單
 		String message = strBuilder.toString();
 		return new ModelAndView("/back-end/reserve/reserveorder", "message", message);
-
+	
 	}
 
 }
