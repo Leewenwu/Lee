@@ -60,7 +60,6 @@ public class ResContentController {
 		model.addAttribute("contentVO", contentVO);
 		result = removeFieldError(contentVO, result, "reserveImage");
 
-
 		if (parts[0].isEmpty()) {
 			byte[] reserveImage = rescontentSvc.getOneContent(contentVO.getId()).getReserveImage();
 			contentVO.setReserveImage(reserveImage);
@@ -73,11 +72,10 @@ public class ResContentController {
 		}
 		if (result.hasErrors()) {
 //			  model.addAttribute("error", result.getAllErrors());
-			  model.addAttribute("error", result.getFieldError("reserveText"));
+			model.addAttribute("error", result.getFieldError("reserveText"));
 			return "back-end/reserve/reservecontentupdate";
 
 		}
-		
 
 		rescontentSvc.updateContent(contentVO);
 		List<ResContentVO> contentList = rescontentSvc.getAllContent();
@@ -104,7 +102,7 @@ public class ResContentController {
 
 		}
 		if (result.hasErrors() || parts[0].isEmpty()) {
-			  model.addAttribute("error", result.getFieldError("reserveText"));
+			model.addAttribute("error", result.getFieldError("reserveText"));
 
 			return "back-end/reserve/reservecontentadd";
 

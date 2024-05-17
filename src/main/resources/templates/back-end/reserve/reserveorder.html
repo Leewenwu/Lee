@@ -140,6 +140,9 @@ tr:nth-child(even) {
 .justify-content-center {
 	justify-content: flex-start !important;
 }
+
+
+
 </style>
 
 </head>
@@ -365,6 +368,8 @@ tr:nth-child(even) {
 
 			var $pager = $('<div class="page" align="center"></div>'); //新建div，放入a標簽,顯示底部分頁碼  
 			for (var pageIndex = 0; pageIndex < sumPages; pageIndex++) {
+// 				 if (pageIndex < 10 || pageIndex == sumPages - 1) {
+				
 				$(
 						'<a href="javascript:void(0)" id="pageStyle" onclick="changCss(this)"><span>'
 								+ (pageIndex + 1) + '</span></a>')
@@ -405,7 +410,24 @@ tr:nth-child(even) {
 			var $pager = $('<div class="page"></div>'); // 创建分页控件
 			$('.center').append($pager); // 将分页控件添加到容器底部
 		});
+		
+		
+		
+		
 	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>
